@@ -1,0 +1,2 @@
+[29-Jun-2010 14:04:58] PHP Warning:  require_once(PHP/Shell.php): failed to open stream: No such file or directory in /home/insitu/public_html/salon/scripts/shell.php on line 27
+[29-Jun-2010 14:04:58] PHP Fatal error:  require_once(): Failed opening required 'PHP/Shell.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/insitu/public_html/salon/scripts/shell.php on line 27

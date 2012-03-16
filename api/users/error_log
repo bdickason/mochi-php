@@ -1,0 +1,7 @@
+[03-Jun-2011 21:14:39] PHP Parse error:  syntax error, unexpected ':' in /home/cpbeauty/public_html/salon/api/users/index.php on line 15
+[03-Jun-2011 21:17:21] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'cpbeauty_salon'@'localhost' (using password: NO) in /home/cpbeauty/public_html/salon/api/users/get.php on line 31
+[03-Jun-2011 21:19:00] PHP Parse error:  syntax error, unexpected ':' in /home/cpbeauty/public_html/salon/api/users/index.php on line 15
+[03-Jun-2011 21:19:29] PHP Parse error:  syntax error, unexpected T_DEFAULT in /home/cpbeauty/public_html/salon/api/users/index.php on line 21
+[03-Jun-2011 21:22:26] PHP Warning:  include_once(config/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/cpbeauty/public_html/salon/api/users/index.php on line 3
+[03-Jun-2011 21:22:26] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'config/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/cpbeauty/public_html/salon/api/users/index.php on line 3
+[04-Jun-2011 00:27:53] PHP Parse error:  syntax error, unexpected '}' in /home/cpbeauty/public_html/salon/api/users/get.php on line 35

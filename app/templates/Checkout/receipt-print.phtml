@@ -1,0 +1,138 @@
+@{block title}
+RECEIPT - TRANSACTION # {$transaction_code}
+{/block}
+
+@{block content}
+<div>        	
+       		<div class="popupBox">
+       		     <div class="busName">Insitu Beauty Lounge</div>       		      
+                 <div class="popupPurpleBar">
+                    <h4>{if $transaction_void}VOID - {/if}RECEIPT - TRANSACTION # {$transaction_code}</h4>
+                </div>
+                       		            	                
+                <div class="clientName">{$client_name}</div>
+                <div class="notes"><p>{$presenter->formatDate($transaction_update_date, 'M j, Y - h:m A')}</p></div>
+                 {if count($services) > 0}
+            	<div class="transactionsBox">
+                        	<div class="darkGreyBar">
+                            	<p>Services Received</p>
+                                <div class="clear"></div>
+
+                            </div>
+                            
+                            {foreach $services as $service}
+                            <div class="itemRow">
+                            	<div class="confirmTrans">
+                            		<div class="ltGreyBar"><p>Service</p></div>
+                                	<div class="checkedInClients">
+	                                	<table cellpadding="0" cellspacing="0" width="100%">
+	                                            <tr>
+	                                                <td><div class="pricepoint">{$service->service_name} - {$service->stylist_name}</div></td>
+	                                            	<td><div class="pricetag">${$service->price}</div></td>
+	                                        	</tr>
+	                                        </table>
+                          			</div>
+                            	</div>
+                           
+                            	<div class="clear"></div>
+                            </div>
+                            {/foreach}
+                            <div>
+                            	<table cellpadding="0" cellspacing="0" width="100%" class="bordertop">
+                                	<tr>
+                                        <td><div class="subtotalTxtConfirm">Services Subtotal:</div></td>
+                                        <td><div class="subtotalNum">${$services_subtotal}</div></td>
+                                        <div class="clear"></div>
+                                	</tr>
+
+                                </table>
+                            </div>
+                            
+                        </div>
+                        {/if}
+                         {if count($products) > 0}
+                        <div class="transactionsBox">
+                        	<div class="darkGreyBar">
+                            	<p>Products Purchased</p>
+                                <div class="clear"></div>
+                            </div>
+
+                            {foreach $products as $product}
+                            <div class="itemRow">
+                            	<div class="confirmTrans">
+                            		<div class="ltGreyBar"><p>Product Name</p></div>
+                                	<div class="checkedInClients">
+                                	<div class="checkedInClients">
+                            			<table cellpadding="0" cellspacing="0" width="100%">
+                                            	<tr> 
+                            						<td><div class="pricepoint">{$product->product_name_raw}{if $product->quantity > 1} x{$product->quantity}{/if}</div></td>
+                                                    <td><div class="pricetag">${$product->price}</div></td>
+                                        		</tr>
+                                        </table>
+                                    </div>
+                          			</div>                                    
+                            	</div>
+                            	
+                            	<div class="clear"></div>
+
+                            </div>
+                            {/foreach}
+                                                        
+                            	<div>
+                            	<table cellpadding="0" cellspacing="0" width="100%" class="bordertop">
+                                	<tr>
+                                        <td><div class="subtotalTxtConfirm">Products Subtotal:</div></td>
+                                        <td><div class="subtotalNum">${$products_subtotal}</div></td>
+                                        <div class="clear"></div>
+                                	</tr>
+                                </table>
+
+                            </div>
+                            
+                        </div>
+                        {/if}
+                        <div class="transactionsBox">
+                        	<div class="darkGreyBar">
+                            	<p>The Bottom Line</p>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div>
+
+                            	<table cellpadding="0" cellspacing="0" width="100%">
+                                	<tr>
+                                        <td><div class="subtotalTxtConfirm">Subtotal:</div></td>
+                                        <td><div class="subtotalNum">${$subtotal}</div></td>
+                                        <div class="clear"></div>
+                                	</tr>
+                                </table>
+                            </div>
+
+                            
+                            	<div>
+                            	<table cellpadding="0" cellspacing="0" width="100%">
+                                	<tr>
+                                        <td><div class="subtotalTxtConfirm">Taxes:</div></td>
+                                        <td><div class="subtotalNum">${$taxes}</div></td>
+                                        <div class="clear"></div>
+                                	</tr>
+                                </table>
+
+                            </div>
+                            
+                            	<div class="grandTotal">
+                                	<table cellpadding="0" cellspacing="0" width="100%">
+                                    	<tr>
+                                        	<td><div class="purpleBarCheckout"><h5>GRAND TOTAL</h5></div></td>
+                                            <td><div class="purpleBarCheckout"><h4>${$grand_total}</h4></div></td>
+                                    	</tr>
+                                    </table>
+
+                            	</div>
+                            
+                            	<div class="clear"></div>
+                        </div>
+        		</div>        
+        </div>
+
+{/block}

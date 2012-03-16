@@ -1,0 +1,11 @@
+{snippet results}
+{foreach $results as $res}
+<div class="searchResultUser" id="res-{$res->uid}"><a href="{link Profile:edit 'id' => $res->uid}">{!$res->title_hl}</a></div>
+{/foreach}
+{if count($results) == 0}
+<div class="searchResultUser" id="res-none"><a href="{link Profile:search}">No users found. Click to see all users.</a></div>
+{else}
+<div class="searchResultUserMore" id="res-all"><a href="{link Profile:search 'search' => $search}">See all {$total} results</a></div>
+{/if}                
+<div class="clear"></div>
+{/snippet}

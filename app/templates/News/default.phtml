@@ -1,0 +1,49 @@
+{block #content}
+    
+    <!-- START TOP SEARCH AND CHECKOUT -->
+    	<div class="userWrapper">
+    	<div class="userResultWrapper qs-results" style="display:none;">
+    	<div class="resultBoxUser">
+            <div id="snippet--results" ></div>
+            
+		 </div>
+		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
+		 </div>	 
+    	<div class="searchBoxUser">
+         {widget searchForm begin}
+		            	{$control['searchForm']['q']->control}            	
+		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
+		                <div class="clear"></div>
+		 {widget searchForm end} 
+		 </div>		 
+		 
+		 <div class="clear"></div>	
+		 
+        </div>
+        
+        <script type="text/javascript">
+
+        $('.searchBoxUser input').attr({'autocomplete':'off'})
+        	.focus()
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
+
+        sms.quicksearch.url = {link QuickSearch:quicksearchuser};
+
+        </script>
+        
+    <!-- END TOP SEARCH AND CHECKOUT -->
+
+
+<div class="userWrapper">
+<ul>
+<li>
+	3/4/10 - Clients can have cut & color stylists associated - assign them in the dropdowns in the right column next to user details. 
+</li>
+</ul>
+</div>
+</div>
+
+
+
+{/block}

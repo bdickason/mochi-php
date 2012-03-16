@@ -1,0 +1,96 @@
+@{block content}
+<div id="smallCalendar"></div>
+<div class="popupBG">
+        	<div class="popupBorder">
+       		<div class="popupBox">
+            	
+                <div class="popupPurpleBar">                	
+                    <h4>Calendar</h4>
+                </div>
+				
+				<div class="transactionsBox">
+					
+					<div class="calendarContainer">
+						<div class="calTopButtonBar">
+							<div class="adminBtn">
+								<a href="{link Calendar:nextDay date=>$date}">Next day</a>
+							</div>					
+							<div class="adminBtn" id="calChangeDate">
+								<a href="#">Change Date</a>								
+							</div>				
+							<div class="adminBtn">
+								<a href="{link Calendar:previousDay date=>$date}">Previous day</a>
+							</div>
+						</div>
+					
+						<div class="clear" />
+								
+						<div class="calendar" id="calendar">
+								<div class="timeline">
+									{foreach $hours as $hour}										
+										<div class="hour heading">{if $hour > 12}{$hour - 12}{else}{$hour}{/if}</div>
+										<div class="hour heading half">:30</div>
+									{/foreach}			
+									<div style="clear:both;"></div>						
+								</div>	
+								<div class="body">
+								{foreach $stylists as $uid => $name}
+									<div class="row" id="sa-{$uid}">
+											<div class="personName">{$name}</div>
+										{foreach $hours as $hour}
+											<div id="hour_{$hour}_00_s{$uid}" class="hourcell"></div>
+											<div id="hour_{$hour}_30_s{$uid}" class="hourcell half"></div>
+										{/foreach}			
+										<div style="clear:both;"></div>						
+									</div>
+								{/foreach}
+								</div>
+						</div>
+						<div style="clear:both;"></div>
+					</div>					
+					
+				</div>
+			</div>
+			</div>
+			
+			
+			
+			<script type="text/javascript" src="{$basePath}/js/sms.calendar.js?1.21">
+			</script>
+			
+			<script type="text/javascript">
+			
+				sms.calendar.init({$date});
+				sms.calendar.startHour = {$hours[0]};
+				sms.calendar.dailyLink = {link Calendar:home date=>"DATE"}
+				
+				//add all the appointments
+				{foreach $apps as $app}
+				sms.calendar.initAppointment({ id:{$app['id']}, name: {$app['name']}, hour: {$app['hour']}, minute:{$app['minute']}, length:{$app['length']}, 'uid':{$app['uid']} });  
+				{/foreach}
+
+				sms.calendar.redraw();
+					
+				$(function()
+				{					
+					sms.calendar.initCells();					
+				});
+
+				function dateChanged(date)
+				{
+					$('#smallCalendar').hide();
+					sms.calendar.gotoDay(date);
+				}	
+
+				$('#smallCalendar').datepicker({ onSelect:dateChanged});
+				$('#calChangeDate a').click(function(evt) { $('#smallCalendar').offset({ top:evt.pageY,left:evt.pageX}).show(); });
+				
+			</script>
+			{include "dialogs.phtml"} 
+</div>
+<div id="app-hover">
+				<span id="ah-name">Peter Jackson</span>
+				<br/>
+				<span id="ah-time">10:30 - 12:00</span>				
+			</div>
+{/block}

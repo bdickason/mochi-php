@@ -1,0 +1,185 @@
+@{block content}
+{include "../Checkout/find-user.phtml"}
+ <!-- START TOP SEARCH AND CHECKOUT -->
+    	<div class="userWrapper">
+    	<div class="userResultWrapper qs-results" style="display:none;">
+    	<div class="resultBoxUser">
+            <div id="snippet--results" ></div>
+            
+		 </div>
+		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
+		 </div>	 
+    	<div class="searchBoxUser">
+         {widget searchForm begin}
+		            	{$control['searchForm']['q']->control}            	
+		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
+		                <div class="clear"></div>
+		 {widget searchForm end} 
+		 </div>		 
+		 
+   	  	 <div class="checkoutBtnUser floatRight"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
+         
+         <div class="clear"></div>	
+		 
+        </div>
+        
+        <script type="text/javascript">
+
+        $('.searchBoxUser input').attr({'autocomplete':'off'})
+        	.focus()
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
+
+        sms.quicksearch.url = {link QuickSearch:quicksearchuser};
+
+        </script>
+    <!-- END TOP SEARCH AND CHECKOUT -->
+    
+    <!-- START CLIENT AND SERVICE DETAILS -->
+    	<div class="userWrapper">
+
+        	<div class="popupBox">
+            	
+            	{include 'navigation.phtml'}
+            	
+                <div class="popupHdrBar">                	
+                    <h4>Daily report</h4>
+                </div>
+                                
+                <div class="transactionsBox">					                    
+                    {widget dailyFilterForm begin}
+                    
+                    <table>
+                    <tr>
+                    	<th align="left">Date</th>
+                    	<td id="datepicker" style="width:650px;">{$control['filterForm']['date']->control} use dd/mm/YYYY notation</td>
+                    </tr>
+                    
+                    <tr>
+                    	<td colspan="2">
+                    	<br/>
+                    		{$control['filterForm']['show']->control}
+                    	</td>
+                    </tr>
+                    
+                    </table>
+                    
+                    	
+                    {widget dailyFilterForm end}
+                    
+                    {if $show_report}
+                    
+                    <br/><br/>
+                    
+                    <!-- TOTAL REVENUE -->
+                    <table cellpadding="0" cellspacing="0" style="margin-bottom:20px; border-collapse:collapse; width:400px;">
+                    	
+                    	<tr>
+                    		<th>Total revenue for {$presenter->formatDate($date, 'n/j/Y')}</th>
+                    		<th colspan="2" align="right">${$presenter->formatPrice($total_revenue)}</th>
+                    	</tr>
+                    	
+                    	<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
+                    
+                    <!-- SERVICES REVENUE -->
+                                        	
+                    	<tr style="border-bottom:1px black solid;">
+                    		<th>Service</th>
+                    		<th>#</th>
+                    		<th>Amount</th>
+                    	</tr>
+                    	{foreach $results[TransactionEntry::ENTRY_TYPE_SERVICE]['entries'] as $entry}
+                    	<tr>
+                    		<td>{$entry['name']}</td>
+                    		<td align="right">{$entry['count']}</td>
+                    		<td align="right">${$presenter->formatPrice($entry['sum'])}</td>
+                    	</tr>
+                    	{/foreach}
+                    	<tr style="border-top:1px black solid;">
+                    		<th>Services subtotal</th>
+                    		<td></td>
+                    		<th align="right">${$presenter->formatPrice($results[TransactionEntry::ENTRY_TYPE_SERVICE]['total'])}</th>
+                    	</tr>
+                    	
+                    	<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
+                    
+                    <!-- PRODUCTS REVENUE -->
+                                                            	
+                    	<tr style="border-bottom:1px black solid;">
+                    		<th>Retail</th>
+                    		<th>#</th>
+                    		<th>Amount</th>
+                    	</tr>
+                    	{foreach $results[TransactionEntry::ENTRY_TYPE_PRODUCT]['entries'] as $entry}
+                    	<tr>
+                    		<td>{$entry['name']}</td>
+                    		<td align="right">{$entry['count']}</td>
+                    		<td align="right">${$presenter->formatPrice($entry['sum'])}</td>
+                    	</tr>
+                    	{/foreach}
+                    	<tr style="border-top:1px black solid;">
+                    		<th>Retail subtotal</th>
+                    		<td></td>
+                    		<th align="right">${$presenter->formatPrice($results[TransactionEntry::ENTRY_TYPE_PRODUCT]['total'])}</th>
+                    	</tr>
+                    	
+                    	<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
+                    
+                    <!-- PAYMENT TYPES -->
+                                        	
+                    	<tr style="border-bottom:1px black solid;">
+                    		<th>Payment type (tax included)</th>
+                    		<th>#</th>
+                    		<th>Amount</th>
+                    	</tr>
+                    	{foreach $results['payment_types']['entries'] as $entry}
+                    	<tr>
+                    		<td>{$entry['name']}</td>
+                    		<td align="right">{$entry['count']}</td>
+                    		<td align="right">${$presenter->formatPrice($entry['sum'])}</td>
+                    	</tr>
+                    	{/foreach}
+                    	<tr style="border-top:1px black solid;">
+                    		<th>Payments total</th>
+                    		<td></td>
+                    		<th align="right">${$presenter->formatPrice($results['payment_types']['total'])}</th>
+                    	</tr>
+                    	
+                    	<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
+                    
+                    <!-- TAXES -->
+                                        	
+                    	<tr style="border-bottom:1px black solid;">
+                    		<th>Tax</th>
+                    		<th></th>
+                    		<th>Amount</th>
+                    	</tr>                    	
+                    	<tr>
+                    		<td>Services tax</td>                    		
+                    		<td colspan="3" align="right">${$presenter->formatPrice($results[TransactionEntry::ENTRY_TYPE_SERVICE]['tax'])}</td>                    		
+                    	</tr>
+                    	<tr>
+                    		<td>Retail tax</td>                    		
+							<td colspan="3" align="right">${$presenter->formatPrice($results[TransactionEntry::ENTRY_TYPE_PRODUCT]['tax'])}</td>                    		
+                    	</tr>
+                    	
+                    	<tr style="border-top:1px black solid;">
+                    		<th>Tax total</th>
+                    		<td></td>
+                    		<th align="right">${$presenter->formatPrice($total_tax)}</th>
+                    	</tr>
+                    </table>
+					{/if}
+       		  	</div>
+            </div>	
+            <div class="clear"></div>			
+		</div>
+		<script type="text/javascript">
+		$(function() {
+			$("#datepicker input").datepicker();
+		});
+	
+		</script>
+<!-- END CLIENT AND SERVICE DETAILS -->
+
+{/block}

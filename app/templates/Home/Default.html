@@ -1,0 +1,22 @@
+{block #content}
+
+    <!-- START CHECKOUT AND SEARCH -->
+    	<div class="wrapperHome">
+        	<div class="checkoutBtn"><a href="{link checkout}" title="Checkout"></a></div>
+            
+            <div class="searchBox">
+            	<div class="searchInput"><input name="search" value="Find People" type="text"></div>
+                <div class="searchBtn"><a href="#" onClick="sms.doSearch();" title="Search"><div class="searchIcon"><img src="{$basePath}/images/icon-search.png" alt="Search" width="51" height="54"></div></a></div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="resultBox">
+            	<div class="searchResult"><a href="#"><strong>Holloway</strong>, Joan</a></div>
+                <div class="searchResult"><a href="#"><strong>Holloway</strong>, Dartanian</a></div>
+                <div class="searchResult"><a href="#"><strong>Holloway</strong>, Alexandra</a></div>
+                <div class="clear"></div>
+            </div>
+            <div class="addClientBtn"><a href="#" onClick="sms.addClient();" title="Add Client"></a></div>
+        </div>
+    <!-- END CHECKOUT AND SEARCH --> 
+{/block}

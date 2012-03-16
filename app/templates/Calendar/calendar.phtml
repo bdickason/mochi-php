@@ -1,0 +1,128 @@
+@{block content}
+<div id="smallCalendar"></div>
+
+<div id="app-hover" style="top:0px; left:0px;">
+<span id="ah-name">Peter Jackson</span><br/>
+<span id="ah-service">Cut</span> with <span id="ah-stylist">Jeremy</span>
+<br/>
+<span id="ah-time-start">10:30 - 12:00</span> to <span id="ah-time-end">10:30 - 12:00</span>
+</div>
+
+ <div class="calendarContainerOuter">
+    <div class="calendarContainer clearfix">
+        <div class="calTopButtonBar clearfix">
+            <div class="calBtn floatLeft" id="calChangeDate">
+                <a href="#" title="Calendar"><span class="miniCalIcon"></span>&#x25BE;</a>
+            </div>
+
+            <div class="calBtn floatLeft todayBtnMargin">
+                <a id="today" href="{link Calendar:home date=> 'today'}">Today</a>
+            </div>
+
+            <div class="calBtn floatLeft">
+                <a title="Previous Day" id="prevday" href="{link Calendar:home date=>Date('Y-m-d', strtotime($date) - 86400)}">&#x25c2;</a>
+            </div>
+            <div id="currentDate" class="currentDate floatLeft">
+                {$presenter->formatDate($date, 'F j')}
+            </div>
+            <div class="calBtn floatLeft">
+                <a title="Next Day" id="nextday" href="{link Calendar:home date=>Date('Y-m-d', strtotime($date) + 86400)}">&#x25B8;</a>
+            </div>
+        </div>
+            
+        <div class="clear"></div>
+								
+        <div class="calendar" id="calendar">
+            <div class="timeline">
+                <div class="calTopLeftEmpty"></div>
+                {foreach $hours as $hour}
+                <div class="hour heading {if $hour->m == 30}half{/if} {if $iterator->isFirst()}roundedTopLeft{/if} {if $iterator->isLast()}roundedTopRight{/if}">
+                    {if $hour->m == 0}
+                        <h2>{if $hour->h > 12}{$hour->h - 12}{else}{$hour->h}{/if}</h2><h5>{if $hour->h >= 12}PM{else}AM{/if}</h5>
+                    {else}
+                        <p>:30</p>
+                    {/if}
+                 </div>
+                {/foreach}
+                <div style="clear:both;"></div>
+            </div>
+            <div class="body">
+            {foreach $stylists as $uid => $name}
+                <div class="row {if $iterator->isLast()}lastrow{/if}" id="sa-{$uid}">
+                    <div class="personName firstcell">{$name}</div>
+                    {foreach $hours as $hour}
+                    <div id="hour_{$hour->h}_{$hour->m}_s{$uid}" class="hourcell {if $hour->m == 30}half{/if} {if $iterator->isLast()}lastcell{/if}">                   
+                    </div>
+                    {/foreach}
+                    <div style="clear:both;"></div>
+                </div>
+            {/foreach}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+     <div class="noteToolbar">
+    <p>
+        {foreach $service_colors as $id => $color_number}
+        <span class="legendColor serviceColor{!$color_number}"></span> {$services[$id]} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {/foreach}
+    </p>
+</div>
+<!-- END LEGEND -->
+
+</div>
+
+<!-- START LEGEND -->
+
+					
+<script type="text/javascript" src="{$basePath}/js/sms.calendar.js">
+</script>
+<script type="text/javascript" src="{$basePath}/js/sms.appointment.js">
+</script>
+<script type="text/javascript" src="{$basePath}/js/sms.dialog.js"></script>
+<script type="text/javascript" src="{$basePath}/js/sms.qs.js">
+</script>
+			
+<script type="text/javascript">
+
+var calendar = new sms.calendar({$date});
+
+calendar.diffZ = {$diffZ};
+calendar.stylists = {!$stylists_json};
+calendar.stylistsIndex = {!$stylists_index_json};
+calendar.services = {!$services_json};
+calendar.serviceColors = {!$service_colors_json};
+
+calendar.startHour = Number({$hours[0]->h});
+calendar.getAppointmentsLink = {link Calendar:getAppointments date=>"DATE"}
+calendar.deleteAppointmentLink = {link Calendar:deleteAppointment id=>"ID"}
+calendar.udateAppointmentLink = {link Calendar:updateAppointment}
+calendar.quckSearchLink = {link QuickSearch:quickSearchAppointment}
+calendar.checkoutLink = {link Checkout:order appointment_id => "ID"}
+
+var appts = {!$appts};
+
+//add all the appointments
+for(var index in appts)
+{					
+    calendar.addAppointment(new sms.appointment(appts[index]));
+}
+
+$(function()
+{					
+    calendar.initCells();
+});
+
+$('#smallCalendar').datepicker({ onSelect:function (date)	{	$('#smallCalendar').hide();	sms.lightbox.hide(); calendar.gotoDay(date);	} } );
+$('#calChangeDate a').click(calendar.showDatePicker);
+$('#prevday').click(function() { calendar.gotoDay(-1); return false; } );
+$('#nextday').click(function() { calendar.gotoDay(1); return false;} );                                
+$('#today').click(function() { calendar.gotoDay('today'); return false;} );
+</script>
+{include "dialogs.phtml"}
+<center style="margin-top:30px;">
+<iframe align="center" src="http://spreadsheets.google.com/embeddedform?formkey=dGNGUHVpQ3dCWjdwenhEbVU2cF9Rc2c6MQ" width="760" height="585" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+</center>
+{/block}

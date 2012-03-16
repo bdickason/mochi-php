@@ -1,0 +1,29 @@
+{block #content}
+{include "../Checkout/find-user.phtml"}
+<!-- START CHECKOUT AND SEARCH -->
+    	<div class="wrapperHome">
+        	<div class="checkoutBtn"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
+            
+            <div class="searchBox">
+            {widget searchForm begin}
+            	{$control['searchForm']['q']->control}            	
+                <div class="searchBtn"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIcon"><img src="{$basePath}/images/icon-search.png" width="51" height="54" alt="Search" /></div></a></div>
+                <div class="clear"></div>
+            {widget searchForm end}
+            </div>            
+            <div class="resultBox qs-results" style="display:none;">
+            <div id="snippet--results"></div>        	
+            </div>
+            <div class="addClientBtn"><a href="{link Profile:adduser}" title="Add Client"></a></div>
+        </div>
+    <!-- END CHECKOUT AND SEARCH -->
+
+<script type="text/javascript">
+
+$('.searchBox input').attr({'autocomplete':'off'})
+	.focus()
+	.bind('keydown', { url: {link QuickSearch:quicksearchhome}}, sms.quicksearch.keydown)	
+	.bind('keyup', { url: {link QuickSearch:quicksearchhome}}, sms.quicksearch.keyup);
+
+sms.quicksearch.url = {link QuickSearch:quicksearchhome};
+</script>

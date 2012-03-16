@@ -1,0 +1,11 @@
+{snippet results}
+{foreach $results as $res}
+<div class="searchResultUser" id="res-{$res->transaction_id}"><a href="{link Checkout:order 'uid' => null, 'transaction_id' => $res->transaction_id}"><strong>#</strong>{!$res->title_hl} - {$res->date}, {$res->transaction_client_name}</a></div>
+{/foreach}
+{if count($results) == 0}
+<div class="searchResultUser" id="res-none"><a href="{link Checkout:search}">No transaction found. Click to list all.</a></div>
+{else}
+<div class="searchResultUserMore" id="res-all"><a href="{link Checkout:search 'search' => $search}">See all {$total} results</a></div>
+{/if}                
+<div class="clear"></div>
+{/snippet}

@@ -1,0 +1,6 @@
+{snippet wideresults}
+{foreach $results as $res}
+<div class="checkoutResultUser" id="res-{$res->uid}"><a href="{link Checkout:order 'uid' => $res->uid}">{!$res->title_hl}</a></div>
+{/foreach}                
+<div class="clear"></div>
+{/snippet}

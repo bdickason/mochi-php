@@ -1,0 +1,160 @@
+@{block content}
+<div class="popupBG">
+        	<div class="popupBorder">
+       		<div class="popupBox">
+       		
+       		<div class="ReceiptHome floatLeft"><a href="{link Default:}" title="Back To Home"></a></div>
+                <div class="ReceiptPrint floatLeft"><a target="_blank" href="{link Checkout:receiptPrint 'transaction_id' => $transaction_id}" title="Print Receipt"></a></div>
+                <div class="clear"></div>
+            	
+                <div class="popupPurpleBar">
+                    <h4>{if $transaction_void}VOID - {/if}RECEIPT - TRANSACTION # {$transaction_code}</h4>
+                </div>
+                       		            	                
+                <div class="clientName"><A HREF="{link Profile:edit 'id' => $transaction_uid}">{$client_name}</a></div>
+                <div class="notes"><p>{$presenter->formatDate($transaction_update_date, 'M j, Y - h:m A')}</p></div>
+                 {if count($services) > 0}
+            	<div class="transactionsBox">
+                        	<div class="darkGreyBar">
+                            	<p>Services Received</p>
+                                <div class="clear"></div>
+
+                            </div>
+                            
+                            {foreach $services as $service}
+                            <div class="itemRow">
+                            	<div class="confirmTrans">
+                            		<div class="ltGreyBar"><p>Service</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="pricepoint">{$service->service_name}</div>
+                          			</div>
+                            	</div>
+
+                            
+                            	<div class="confirmTrans">
+                            		<div class="ltGreyBar"><p>Stylist</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="pricepoint">{$service->stylist_name}</div>
+                          			</div>
+                            	</div>
+                            
+                            	<div class="pricetag">
+                            		<div class="ltGreyBar"><h5>Price</h5></div>
+
+                                	<div class="pricepoint">${$service->price}</div>
+                            	</div>
+                            
+                            	<div class="clear"></div>
+                            </div>
+                            {/foreach}
+                            <div>
+                            	<div class="subtotalTxtConfirm">Services Subtotal:</div>
+                                <div class="subtotalNum">${$services_subtotal}</div>
+
+                                <div class="clear"></div>
+                            </div>
+                            
+                        </div>
+                        {/if}
+                         {if count($products) > 0}
+                        <div class="transactionsBox">
+                        	<div class="darkGreyBar">
+                            	<p>Products Purchased</p>
+                                <div class="clear"></div>
+                            </div>
+
+                            {foreach $products as $product}
+                            <div class="itemRow">
+                            	<div class="confirmTrans" style="width:374px;">
+                            		<div class="ltGreyBar"><p>Product Name</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="checkedInClients"> 
+                            			<div class="pricepoint">{$product->product_name}</div>
+                          			</div>
+                          			</div>                                    
+                            	</div>
+                            	<div class="confirmTrans qty">
+                            		<div class="ltGreyBar"><h5>QTY</h5></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="pricepoint" style="text-align:center;">{$product->quantity}</div>
+                          			</div>
+                            	</div>                            
+                            	<div class="confirmTrans">
+                            		<div class="ltGreyBar"><p>Product sold by</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="checkedInClients"> 
+                            			<div class="pricepoint">{$product->user_name}</div>
+
+                          			</div>
+                          			</div>                                    
+                            	</div>                            
+                            	<div class="pricetag">
+                            		<div class="ltGreyBar"><h5>Price</h5></div>
+                                	<div class="pricepoint">${$product->price}</div>                                    
+                            	</div>
+                            
+                            	<div class="clear"></div>
+
+                            </div>
+                            {/foreach}
+                            <div>
+                            	<div class="subtotalTxtConfirm">Products Subtotal:</div>
+                                <div class="subtotalNum">${$products_subtotal}</div>
+                                <div class="clear"></div>
+                            </div>
+                            
+                        </div>
+                        {/if}
+                        <div class="transactionsBox">
+
+                        	<div class="darkGreyBar">
+                            	<p>The Bottom Line</p>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div class="itemRow">
+                            	<div class="category">
+                            		<div class="ltGreyBar"><p>Promotional Code?</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="pricepoint"></div>
+
+                          			</div>
+                            	</div>
+                            	
+                            	<div class="finalPrice">
+                            		<div class="ltGreyBar"><h5>Payment Method</h5></div>
+                                	<div class="checkedInClients"> 
+                            			{$payment_type}
+                          			</div>
+                            	</div>
+                            
+                            	<div class="finalPrice">
+                            		<div class="ltGreyBar"><p>Subtotal</p></div>
+                                	<div class="checkedInClients"> 
+                            			<div class="pricepoint">${$subtotal}</div>
+                          			</div>
+                            	</div>
+
+                            
+                            	<div class="pricetag">
+                            		<div class="ltGreyBar"><h5>Taxes</h5></div>
+                                	<div class="pricepoint">${$taxes}</div>
+                            	</div>
+                            
+                            	<div class="grandTotal">
+                            		<div class="purpleBarCheckout"><h5>GRAND TOTAL</h5><h4>${$grand_total}</h4></div>
+                            	</div>
+
+                            
+                            	<div class="clear"></div>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            
+                        </div>
+            	
+        		</div>
+            </div>
+        </div>
+
+{/block}

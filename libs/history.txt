@@ -1,0 +1,1500 @@
+Version 0.9 on 2009-11-12 (b9fd602)
+-----------------------------------
+Released version 0.9.2
+
+
+Version 0.9 on 2009-11-12 (aa7f145)
+-----------------------------------
+Route: changed optional sequences delimiters from {} to [] (BC break!)
+
+
+Version 0.9 on 2009-11-10 (b47b1d6)
+-----------------------------------
+RobotLoader: speed optimization
+
+
+Version 0.9 on 2009-11-10 (abca712)
+-----------------------------------
+RobotLoader: skips unmodified files
+
+
+Version 0.9 on 2009-11-10 (11649d6)
+-----------------------------------
+Image: added FILL resize flag
+
+
+Version 0.9 on 2009-11-10 (125a18d)
+-----------------------------------
+typos
+
+
+Version 0.9 on 2009-11-10 (6059536)
+-----------------------------------
+Image: crop() now accepts percent parameters
+
+
+Version 0.9 on 2009-11-10 (b198b71)
+-----------------------------------
+Image, RobotLoader, Ftp: added missing checks for loaded PHP extensions
+
+
+Version 0.9 on 2009-11-10 (9e5e0b4)
+-----------------------------------
+Nette\Test: minor error handling improvement
+
+
+Version 0.9 on 2009-11-10 (8205a6f)
+-----------------------------------
+Nette\Test: added support for environment, shorthand for set of command line arguments
+
+
+Version 0.9 on 2009-11-10 (1867965)
+-----------------------------------
+Nette\Test: pre-skip annotation @phpversion now accepts comparison operator
+
+
+Version 0.9 on 2009-11-10 (250ad85)
+-----------------------------------
+Forms: allow IDN top level domains in e-mail
+
+
+Version 0.9 on 2009-11-10 (d31e2fd)
+-----------------------------------
+Nette\Test: added skip reasons
+
+
+Version 0.9 on 2009-11-10 (f47362e)
+-----------------------------------
+Nette\Test: new option -s displays information about skipped tests
+
+
+Version 0.9 on 2009-11-10 (b826563)
+-----------------------------------
+Nette\Test: fixed bug -- all paths specified are made absolute
+
+
+Version 0.9 on 2009-11-10 (ff0d51a)
+-----------------------------------
+Nette\Test: fixed bug -- absolute path is no longer treated as option
+
+
+Version 0.9 on 2009-11-10 (d937c96)
+-----------------------------------
+tests: fixed test
+
+
+Version 0.9 on 2009-11-10 (d424fe7)
+-----------------------------------
+Nette\Tests: added shell script for Linux
+
+
+Version 0.9 on 2009-11-10 (984fa31)
+-----------------------------------
+Nette\Test: fixed return status
+
+
+Version 0.9 on 2009-11-10 (6656fa7)
+-----------------------------------
+Nette\Test: fixed bug
+
+
+Version 0.9 on 2009-11-10 (f84097d)
+-----------------------------------
+Nette\Test: small refactoring, new option -l accepts LD_LIBRARY_PATH
+
+
+Version 0.9 on 2009-11-10 (77ffe12)
+-----------------------------------
+Application: method getSession() has $namespace parameter
+
+
+Version 0.9 on 2009-11-10 (a02a746)
+-----------------------------------
+FileStorage: fixed bug in clean() with Cache::ALL
+
+
+Version 0.9 on 2009-11-10 (3c0bd6d)
+-----------------------------------
+LatteMacros: {layout ...} alias for {extends ...}
+
+
+Version 0.9 on 2009-11-10 (60a166a)
+-----------------------------------
+RobotLoader: ignores dir 'temp'
+
+
+Version 0.9 on 2009-11-10 (95f103c)
+-----------------------------------
+Forms: TextInput with ~Form::LENGTH doesn't generate maxlength attr
+
+
+Version 0.9 on 2009-11-10 (f3fb618)
+-----------------------------------
+Debug: notification e-mails are sent after 2 days again
+
+
+Version 0.9 on 2009-11-10 (34a6894)
+-----------------------------------
+Debug: fixed Content-Encoding and some minor bugs
+
+
+Version 0.9 on 2009-11-10 (9aac98d)
+-----------------------------------
+Presenter: added getUser() shortcut for Environment::getUser()
+
+
+Version 0.9 on 2009-11-10 (432210c)
+-----------------------------------
+internal members are underscore prefixed and annotated with @internal
+
+
+Version 0.9 on 2009-11-10 (3608435)
+-----------------------------------
+AutoLoader: load() throws exception if is unable to load class
+
+
+Version 0.9 on 2009-11-10 (98c253a)
+-----------------------------------
+Skeleton: typos
+
+
+Version 0.9 on 2009-11-10 (9bdb0dd)
+-----------------------------------
+Comments: typos
+
+
+Version 0.9 on 2009-11-10 (f56a0e6)
+-----------------------------------
+Permission: remove unnecessary do-while
+
+
+Version 0.9 on 2009-11-10 (c304386)
+-----------------------------------
+Comments: type of returned array
+
+
+Version 0.9 on 2009-11-10 (c4dc825)
+-----------------------------------
+LatteMacros: snippet macro small refactoring
+
+
+Version 0.9 on 2009-11-10 (b5119cf)
+-----------------------------------
+Presenter: snippet rendering is triggered by invalidateControl
+
+
+Version 0.9 on 2009-11-10 (46bb494)
+-----------------------------------
+LatteMacros: in block names prefix # is optional
+
+
+Version 0.9 on 2009-11-10 (7cd1495)
+-----------------------------------
+Skeleton simplified
+
+
+Version 0.9 on 2009-10-14 (2a1f6e1)
+-----------------------------------
+Presenter: sendTemplate() and snippets refactoring
+
+
+Version 0.9 on 2009-10-14 (14d3784)
+-----------------------------------
+Presenter: method getSession() has $namespace parameter
+
+
+Version 0.9 on 2009-10-14 (696be65)
+-----------------------------------
+Presenter: fixed terminate() back compatibility in AJAX
+
+
+Version 0.9 on 2009-10-14 (e403c0e)
+-----------------------------------
+FormControl: tiny refactoring
+
+
+Version 0.9 on 2009-10-14 (28c8d16)
+-----------------------------------
+ArrayTools: added method getRef()
+
+
+Version 0.9 on 2009-10-14 (1d77505)
+-----------------------------------
+tests: added new template inheritance tests
+
+
+Version 0.9 on 2009-10-14 (4bbdec5)
+-----------------------------------
+Route: removed limitation for optional on left side, required on right side
+
+
+Version 0.9 on 2009-10-13 (0587466)
+-----------------------------------
+Presenter: setLayout() correctly accepts FALSE
+
+
+Version 0.9 on 2009-10-12 (e2de808)
+-----------------------------------
+FormContainer: cloning is NOT supported and throws exception
+
+
+Version 0.9 on 2009-10-12 (774faf0)
+-----------------------------------
+typo
+
+
+Version 0.9 on 2009-10-12 (44d717e)
+-----------------------------------
+Requirements-Checker: added PHP tokenizer check
+
+
+Version 0.9 on 2009-10-12 (e6f1e4d)
+-----------------------------------
+Skeleton: added folders: controls, tests, js
+
+
+Version 0.9 on 2009-10-12 (acdeb1c)
+-----------------------------------
+Route: improved module & presenter splitting in constructUrl()
+
+
+Version 0.9 on 2009-10-12 (9fa799e)
+-----------------------------------
+MultiRouter: internal cache is case-insensitive now
+
+
+Version 0.9 on 2009-10-12 (9be8fab)
+-----------------------------------
+Route: improved module & presenter splitting in constructUrl()
+
+
+Version 0.9 on 2009-10-12 (9c8b4e2)
+-----------------------------------
+Route: fixed bug
+
+
+Version 0.9 on 2009-10-12 (050aec1)
+-----------------------------------
+protected properties in some classes changed to private (CliRouter, Route, SimpleRouter, MemcachedStorage) BC break
+
+
+Version 0.9 on 2009-10-12 (106ac05)
+-----------------------------------
+Route: improved query part of mask detection
+
+
+Version 0.9 on 2009-10-02 (447a6cd)
+-----------------------------------
+Presenter: missing layout template file throws FileNotFoundException instead of BadRequestException
+
+
+Version 0.9 on 2009-10-02 (92d5f03)
+-----------------------------------
+Session: fixed bug in combination of setName() & exists()
+
+
+Version 0.9 on 2009-10-01 (be8d108)
+-----------------------------------
+Template: constructor
+
+
+Version 0.9 on 2009-10-01 (7e84a06)
+-----------------------------------
+Template: constructor
+
+
+Version 0.9 on 2009-10-01 (ef1a604)
+-----------------------------------
+HttpResponse: default cookiePath changed to '/'
+
+
+Version 0.9 on 2009-09-30 (54a33fd)
+-----------------------------------
+LatteMacros: added macro {status ...} for HTTP status code
+
+
+Version 0.9 on 2009-09-30 (e09f427)
+-----------------------------------
+Mail: multiline html titles are now recognized
+
+
+Version 0.9 on 2009-09-30 (26ec403)
+-----------------------------------
+Control: new preregistered template helpers: length, substr, number, replace, replaceRE, repeat, implode
+
+
+Version 0.9 on 2009-09-29 (bbc2954)
+-----------------------------------
+Control: added parameter $basePath to template ($baseUri alternative without trailing slash)
+
+
+Version 0.9 on 2009-09-28 (b7c1b87)
+-----------------------------------
+FormControl: added htmlName invalidation
+
+
+Version 0.9 on 2009-09-28 (2ebcdc5)
+-----------------------------------
+Control: changed snippet ID (from id__name => snippet-id-name)
+
+
+Version 0.9 on 2009-09-25 (a3aaf4c)
+-----------------------------------
+PresenterLoader: is independent of the Environment
+
+
+Version 0.9 on 2009-09-25 (ea203f7)
+-----------------------------------
+typos
+
+
+Version 0.9 on 2009-09-25 (1fb146b)
+-----------------------------------
+Presenter: formatLayoutTemplateFiles() searches @layout in all super modules
+
+
+Version 0.9 on 2009-09-25 (29fe336)
+-----------------------------------
+PresenterLoader: fixed bug
+
+
+Version 0.9 on 2009-09-25 (9a9671b)
+-----------------------------------
+Presenter: changed templates location within modules; added $oldModuleMode
+
+
+Version 0.9 on 2009-09-25 (b648b41)
+-----------------------------------
+PresenterLoader: changed presenters location; in PHP 5.3 changed module namespaces (BC break!)
+
+
+Version 0.9 on 2009-09-25 (6b45a1f)
+-----------------------------------
+Environment & others: removed variables %templatesDir%, %presentersDir%, %componentsDir%, %modelsDir% (BC break!)
+
+
+Version 0.9 on 2009-09-25 (a2c0bb9)
+-----------------------------------
+RobotLoader: changed cache key name
+
+
+Version 0.9 on 2009-09-24 (d064ce8)
+-----------------------------------
+Route: implemented "required" optional sequences
+
+
+Version 0.9 on 2009-09-24 (5ed6fb6)
+-----------------------------------
+Route: improved optional parts {...}
+
+
+Version 0.9 on 2009-09-24 (9285b83)
+-----------------------------------
+Presenter: missing user layout file throws exception
+
+
+Version 0.9 on 2009-09-24 (35fc132)
+-----------------------------------
+RoutingDebugger: fixed tiny bug
+
+
+Version 0.9 on 2009-09-24 (4e58d5b)
+-----------------------------------
+Route: implemented smarter syntax for optional parameters using {...<param>...}
+
+
+Version 0.9 on 2009-09-24 (385c7bd)
+-----------------------------------
+Route: tiny refactoring
+
+
+Version 0.9 on 2009-09-23 (3361172)
+-----------------------------------
+HttpResponse: setHeader() can remove header in PHP 5.3
+
+
+Version 0.9 on 2009-09-23 (66dccea)
+-----------------------------------
+HttpResponse: setHeader() can remove header in PHP 5.3
+
+
+Version 0.9 on 2009-09-22 (2a6966c)
+-----------------------------------
+Template: file checking refactoring
+
+
+Version 0.9 on 2009-09-21 (c39cd95)
+-----------------------------------
+LatteMacros: modifiers are applied after translate()
+
+
+Version 0.9 on 2009-09-21 (4ded33c)
+-----------------------------------
+FormControl: added setDefaultValue()
+
+
+Version 0.9 on 2009-09-21 (8d7ee03)
+-----------------------------------
+FormContainer: setDefaults() is allowed for unanchored forms
+
+
+Version 0.9 on 2009-09-20 (807e3f4)
+-----------------------------------
+tests:  added new Nette\Template tests
+
+
+Version 0.9 on 2009-09-20 (36c0f43)
+-----------------------------------
+tests: Nette\Template tests refactoring
+
+
+Version 0.9 on 2009-09-20 (e25dd82)
+-----------------------------------
+TemplateFilters: removed autoConfig
+
+
+Version 0.9 on 2009-09-19 (9668a2a)
+-----------------------------------
+LatteMacros: fixed ifCurrent macro and Presenter::$invalidLinkMode = Presenter::INVALID_LINK_EXCEPTION
+
+
+Version 0.9 on 2009-09-18 (3b81e33)
+-----------------------------------
+opened 0.9.2-dev
+
+
+Version 0.9 on 2009-09-18 (aebdbbd)
+-----------------------------------
+tests: added tests for Nette\Mail
+
+
+Version 0.9 on 2009-09-18 (dc607f0)
+-----------------------------------
+Released version 0.9.1
+
+
+Version 0.9 on 2009-09-18 (4beb655)
+-----------------------------------
+HttpUploadedFile: move() uses again move_uploaded_file() due safe mode restrictions
+
+
+Version 0.9 on 2009-09-18 (dfd47f9)
+-----------------------------------
+Application: allowed REST methods
+
+
+Version 0.9 on 2009-09-18 (2511b63)
+-----------------------------------
+PresenterRequest: all setters provide a fluent interface
+
+
+Version 0.9 on 2009-09-18 (e46b4c5)
+-----------------------------------
+ConventionalRenderer: support for semicolon as GET parameter separator
+
+
+Version 0.9 on 2009-09-18 (e97de39)
+-----------------------------------
+SubmitButton: isSubmittedBy() returns TRUE for first form's button
+
+
+Version 0.9 on 2009-09-18 (b408970)
+-----------------------------------
+HttpResponse: enableCompression() flushes data continuously
+
+
+Version 0.9 on 2009-09-18 (8c43934)
+-----------------------------------
+IAuthenticator: added NOT_APPROVED const
+
+
+Version 0.9 on 2009-09-18 (5cbc4bb)
+-----------------------------------
+Environment: more pragmatic @return phpDoc
+
+
+Version 0.9 on 2009-09-18 (5f85603)
+-----------------------------------
+All setters provide a fluent interface now (i.e. return $this)
+
+
+Version 0.9 on 2009-09-17 (2ecccfb)
+-----------------------------------
+Presenter: fixed bug in run() -- sendPayload() is called twice
+
+
+Version 0.9 on 2009-09-17 (650d722)
+-----------------------------------
+Nette\Test: implemented code coverage analysis
+
+
+Version 0.9 on 2009-09-17 (8a5f269)
+-----------------------------------
+fixed missing namespaces
+
+
+Version 0.9 on 2009-09-17 (01c4e03)
+-----------------------------------
+tests: some tests updated and rewritten to Nette\Test
+
+
+Version 0.9 on 2009-09-16 (33a21e1)
+-----------------------------------
+Nette\Test: support for pre-skip annotations @phpversion & @skip
+
+
+Version 0.9 on 2009-09-16 (8d2dd7e)
+-----------------------------------
+Nette\Test: implemented test skipping
+
+
+Version 0.9 on 2009-09-16 (37d6c94)
+-----------------------------------
+Image: better support for rotate()
+
+
+Version 0.9 on 2009-09-16 (b73d4f2)
+-----------------------------------
+tests: some other tests rewritten to Nette\Test
+
+
+Version 0.9 on 2009-09-15 (39d40cd)
+-----------------------------------
+Nette\Test: added exception handler
+
+
+Version 0.9 on 2009-09-15 (ec1e871)
+-----------------------------------
+Nette\Test: class Test renamed to NetteTestHelpers
+
+
+Version 0.9 on 2009-09-15 (338a96e)
+-----------------------------------
+tests: Collections and some other tests rewritten to Nette\Test
+
+
+Version 0.9 on 2009-09-15 (f53abdf)
+-----------------------------------
+Nette\Test: added tag for HEX digits; better exception dumping
+
+
+Version 0.9 on 2009-09-15 (9525990)
+-----------------------------------
+tests: Routers tests rewritten to Nette\Test
+
+
+Version 0.9 on 2009-09-15 (ddfa43d)
+-----------------------------------
+Nette\Test: fixed some bugs
+
+
+Version 0.9 on 2009-09-15 (8d001dd)
+-----------------------------------
+typos
+
+
+Version 0.9 on 2009-09-15 (c86f2d9)
+-----------------------------------
+fixed non-UTF8 \s in some regular expressions
+
+
+Version 0.9 on 2009-09-15 (f0c481d)
+-----------------------------------
+tests: renamed to match conventions
+
+
+Version 0.9 on 2009-09-15 (bd3bb0f)
+-----------------------------------
+Nette\Test: added whitespace normalization; better output format
+
+
+Version 0.9 on 2009-09-14 (4d3e640)
+-----------------------------------
+ComponentContainer: fixed '0' name bug
+
+
+Version 0.9 on 2009-09-14 (8d0263b)
+-----------------------------------
+Forms: minor improvements
+
+
+Version 0.9 on 2009-09-14 (014d06f)
+-----------------------------------
+Component: added method unmonitor(), counterpart to monitor()
+
+
+Version 0.9 on 2009-09-14 (d8cda3a)
+-----------------------------------
+Form: processHttpRequest() replaced with fireEvents()
+
+
+Version 0.9 on 2009-09-14 (4d8ae7e)
+-----------------------------------
+Form, AppForm: isSubmitted() & getHttpData() refactoring
+
+
+Version 0.9 on 2009-09-14 (663463d)
+-----------------------------------
+typos
+
+
+Version 0.9 on 2009-09-14 (4b3e313)
+-----------------------------------
+Form: removed addTracker() method; pass $name to the constructor
+
+
+Version 0.9 on 2009-09-14 (691b28a)
+-----------------------------------
+Form: isValid() and validate() moved to FormContainer
+
+
+Version 0.9 on 2009-09-14 (90a2d29)
+-----------------------------------
+Forms: new concept of isSubmitted(), processHttpRequest() and loadHttpData() handling FormControls: responsibility for loading HTTP data transferred from the form to the controls
+
+
+Version 0.9 on 2009-09-14 (9d68942)
+-----------------------------------
+Form & AppForm: added getHttpData() method
+
+
+Version 0.9 on 2009-09-14 (21e873c)
+-----------------------------------
+ArrayTools::get() accepts array of keys
+
+
+Version 0.9 on 2009-09-13 (42f72a2)
+-----------------------------------
+improved some exception messages
+
+
+Version 0.9 on 2009-09-13 (c242fc9)
+-----------------------------------
+Component: attached() and detached() are called after all $monitors are updated
+
+
+Version 0.9 on 2009-09-13 (19c40f5)
+-----------------------------------
+tests: Forms reference samples updated
+
+
+Version 0.9 on 2009-09-13 (44add9f)
+-----------------------------------
+TextBase, TextArea and TextInput refactoring. Got rid of TextBase::$tmpValue;
+
+
+Version 0.9 on 2009-09-13 (f0c6543)
+-----------------------------------
+Form: setDefaults(), setValues() and getValues() moved to FormContainer
+
+
+Version 0.9 on 2009-09-13 (1469889)
+-----------------------------------
+Form: removed isPopulated()
+
+
+Version 0.9 on 2009-09-13 (e9e556d)
+-----------------------------------
+RecursiveComponentIterator, InstanceFilterIterator, RecursiveHtmlIterator: are Countable now
+
+
+Version 0.9 on 2009-09-12 (5415c8a)
+-----------------------------------
+Debug: used header_remove in PHP 5.3
+
+
+Version 0.9 on 2009-09-12 (86cc9c9)
+-----------------------------------
+ConventionalRenderer: fixed GET form with parameter duplication
+
+
+Version 0.9 on 2009-09-11 (f434aaf)
+-----------------------------------
+ComponentContainer: fixed bug in getComponent() on non-container
+
+
+Version 0.9 on 2009-09-09 (aa4f2c0)
+-----------------------------------
+examples: better readability of RobotLoader service in config.ini
+
+
+Version 0.9 on 2009-09-09 (9341846)
+-----------------------------------
+Route: allowed whitespace between pattern and #class in mask
+
+
+Version 0.9 on 2009-09-09 (a513c7f)
+-----------------------------------
+Route: added new flag FULL_META
+
+
+Version 0.9 on 2009-09-09 (a4b45bd)
+-----------------------------------
+Route: internal meta key 'default' replaced with constant Route::VALUE
+
+
+Version 0.9 on 2009-09-09 (1eb2dca)
+-----------------------------------
+LatteMacros: implemented macro attribute prefix 'tag-'
+
+
+Version 0.9 on 2009-09-09 (0ad8927)
+-----------------------------------
+LatteMacros: added macro {syntax ...}
+
+
+Version 0.9 on 2009-09-09 (2e0cd4f)
+-----------------------------------
+Session: added workaround for IE 8 buggy header Accept-Language in AJAX
+
+
+Version 0.9 on 2009-09-08 (93299bc)
+-----------------------------------
+Debug: deprecated isDebugging()
+
+
+Version 0.9 on 2009-09-08 (3879187)
+-----------------------------------
+Debug: in strictMode sends HTTP 500 code
+
+
+Version 0.9 on 2009-09-08 (11bcca3)
+-----------------------------------
+Image: resize() and crop() preserves transparency (thanks to Kravco)
+
+
+Version 0.9 on 2009-09-08 (0dc29a2)
+-----------------------------------
+Image: fromBlank() now accepts 'alpha' key (thanks to Kravco)
+
+
+Version 0.9 on 2009-09-08 (c19e972)
+-----------------------------------
+Image: fromString() now detects image format information (thanks to Kravco)
+
+
+Version 0.9 on 2009-09-02 (ac84130)
+-----------------------------------
+Html: fix - attrib('') and attrib('', TRUE) behave the same
+
+
+Version 0.9 on 2009-09-02 (6ac45e9)
+-----------------------------------
+ComponentContainer: getComponent() accepts 0 as name
+
+
+Version 0.9 on 2009-09-01 (2fd3b5f)
+-----------------------------------
+JsonResponse: constructor accepts array or stdClass
+
+
+Version 0.9 on 2009-09-01 (c4284f1)
+-----------------------------------
+LatteMacros: $blocks structure refactoring
+
+
+Version 0.9 on 2009-09-01 (a0b08c8)
+-----------------------------------
+LatteMacros: capturing block {block $var} renamed to {capture $var}
+
+
+Version 0.9 on 2009-09-01 (c82ba8f)
+-----------------------------------
+HttpRequest: some missing items in $_SERVER will not throw E_NOTICE
+
+
+Version 0.9 on 2009-09-01 (d1001e1)
+-----------------------------------
+MailMimePart: changed folding ws-character from space to tabulator
+
+
+Version 0.9 on 2009-09-01 (e290158)
+-----------------------------------
+Debug: improved dump() for non-ASCII characters
+
+
+Version 0.9 on 2009-09-01 (eabe784)
+-----------------------------------
+Nette\Test: added new simple unit test framework
+
+
+Version 0.9 on 2009-09-01 (adfa44d)
+-----------------------------------
+CurlyBracketsFilter & CurlyBracketsMacros renamed to LatteFilter & LatteMacros
+
+
+Version 0.9 on 2009-08-31 (2e9b818)
+-----------------------------------
+ImageMagick: exec() uses escapeshellarg()
+
+
+Version 0.9 on 2009-08-31 (584816e)
+-----------------------------------
+cleanup
+
+
+Version 0.9 on 2009-08-31 (86c32c9)
+-----------------------------------
+SmartCachingIterator: is Countable now
+
+
+Version 0.9 on 2009-08-31 (209063f)
+-----------------------------------
+JsonResponse: constructor accepts array
+
+
+Version 0.9 on 2009-08-30 (d45ce91)
+-----------------------------------
+CurlyBracketsFilter: added setDelimiters() for setting user macro syntax
+
+
+Version 0.9 on 2009-08-29 (03e32b3)
+-----------------------------------
+IPresenter: method run() has now parameter PresenterRequest
+
+
+Version 0.9 on 2009-08-29 (fb08627)
+-----------------------------------
+Requirements-Checker: redesigned
+
+
+Version 0.9 on 2009-08-27 (b6a8382)
+-----------------------------------
+AbortException: reverted to exception without error message or code
+
+
+Version 0.9 on 2009-08-27 (12fc336)
+-----------------------------------
+Presenter: method renderTemplate() renamed to sendTemplate() (BC break!)
+
+
+Version 0.9 on 2009-08-27 (57cd9a2)
+-----------------------------------
+Application: added DownloadResponse
+
+
+Version 0.9 on 2009-08-27 (5a6154a)
+-----------------------------------
+Application: implemented RenderResponse & JsonResponse into Presenter
+
+
+Version 0.9 on 2009-08-27 (b74cc8d)
+-----------------------------------
+Application: routers and exceptions moved to new subfolders
+
+
+Version 0.9 on 2009-08-27 (4decd62)
+-----------------------------------
+ForwardingException & RedirectingException turned into ForwardingResponse & RedirectingResponse; TerminateException removed
+
+
+Version 0.9 on 2009-08-27 (21d6fbe)
+-----------------------------------
+implemented IPresenterResponse
+
+
+Version 0.9 on 2009-08-26 (80cf60a)
+-----------------------------------
+TemplateHelpers: strip() leaves <script>, <pre>, <textarea> untouched
+
+
+Version 0.9 on 2009-08-26 (d52a529)
+-----------------------------------
+HttpUploadedFile: fixed multiple move() calling
+
+
+Version 0.9 on 2009-08-26 (39019a2)
+-----------------------------------
+Session: method configure() is private now; replaced by public pair setOptions() and getOptions() (BC break!)
+
+
+Version 0.9 on 2009-08-26 (c3982c3)
+-----------------------------------
+Application: fixed bug in setRouter()
+
+
+Version 0.9 on 2009-08-21 (d7cbaa9)
+-----------------------------------
+Merge branch 'master' of git@github.com:dg/nette
+
+
+Version 0.9 on 2009-08-21 (3d69f08)
+-----------------------------------
+- HttpResponse: ability to remove header in PHP 5.3
+
+
+Version 0.9 on 2009-08-21 (8de354c)
+-----------------------------------
+Annotations: fixed caching bug; added support for NULL
+
+
+Version 0.9 on 2009-08-21 (de8b888)
+-----------------------------------
+Merge branch 'master' of github.com:dg/nette
+
+
+Version 0.9 on 2009-08-21 (481437e)
+-----------------------------------
+BaseTemplate: optimizePhp() correctly handles if(): ... if() ... else:
+
+
+Version 0.9 on 2009-08-21 (184f6b0)
+-----------------------------------
+- HttpResponse: don't send Cache-Control: must-revalidate with non-zero expiration
+
+
+Version 0.9 on 2009-08-21 (cfc44fd)
+-----------------------------------
+FileStorage: implemented safe mode restriction checking
+
+
+Version 0.9 on 2009-08-21 (304c18e)
+-----------------------------------
+Control: createComponent() moved to ComponentContainer; ArrayAccess moved to PresenterComponent
+
+
+Version 0.9 on 2009-08-21 (45cba8e)
+-----------------------------------
+FormControls: getLabel() and getControl() allows change caption
+
+
+Version 0.9 on 2009-08-21 (66ab28e)
+-----------------------------------
+TemplateHelpers: date() has better integration with DateTime object
+
+
+Version 0.9 on 2009-08-20 (db562bf)
+-----------------------------------
+Application: sends HTTP error code automatically
+
+
+Version 0.9 on 2009-08-20 (c2f664b)
+-----------------------------------
+FileStorage: better file deleting on NTFS (Windows)
+
+
+Version 0.9 on 2009-08-19 (8f16ab2)
+-----------------------------------
+examples: RobotLoader factory moved from bootstrap.php to config.ini
+
+
+Version 0.9 on 2009-08-19 (a53d980)
+-----------------------------------
+Configurator: added default RobotLoader factory
+
+
+Version 0.9 on 2009-08-19 (5cf7710)
+-----------------------------------
+Environment: allows adding new static methods get<Service>() (in PHP 5.3)
+
+
+Version 0.9 on 2009-08-19 (c2ebb91)
+-----------------------------------
+IServiceLocator: addService() and getService() API was changed (BC break!)
+
+
+Version 0.9 on 2009-08-19 (a4da671)
+-----------------------------------
+IComponent: removed IServiceLocator support
+
+
+Version 0.9 on 2009-08-19 (76d3552)
+-----------------------------------
+CurlyBracketsMacros: removed exception for # in block names
+
+
+Version 0.9 on 2009-08-19 (e947e59)
+-----------------------------------
+CurlyBracketsFilter: added support for empty tags
+
+
+Version 0.9 on 2009-08-19 (d766e28)
+-----------------------------------
+CurlyBracketsMacros: added support for n:inner- macro attributes
+
+
+Version 0.9 on 2009-08-19 (e9c0f63)
+-----------------------------------
+- ArrayTools: added new class - Tools::arrayGet() & arrayMergeTree() moved to ArrayTools (BC break!)
+
+
+Version 0.9 on 2009-08-18 (93bf8be)
+-----------------------------------
+TemplateHelpers: fixed overflow in bytes()
+
+
+Version 0.9 on 2009-08-17 (c82239a)
+-----------------------------------
+Caching: variable %cacheBase% replaced with %tempDir%
+
+
+Version 0.9 on 2009-08-17 (32a19af)
+-----------------------------------
+CurlyBracketsMacros: {attr} is multiline; added {control} as {widget} alias
+
+
+Version 0.9 on 2009-08-17 (4173105)
+-----------------------------------
+FreezableObject wakeup bug fixed
+
+
+Version 0.9 on 2009-08-16 (6280dea)
+-----------------------------------
+CurlyBracketsFilter: added "missing end tag" checking
+
+
+Version 0.9 on 2009-08-16 (221b93e)
+-----------------------------------
+FileStorage: subdirs are not available in safe-mode
+
+
+Version 0.9 on 2009-08-15 (d24377f)
+-----------------------------------
+Cache: added CALLBACKS dependency; FILES & CONSTS dependencies are converted to CALLBACKS dependencies
+
+
+Version 0.9 on 2009-08-15 (40d0eb5)
+-----------------------------------
+CRLF
+
+
+Version 0.9 on 2009-08-15 (4a521fa)
+-----------------------------------
+Identity is FreezableObject descendant
+
+
+Version 0.9 on 2009-08-15 (45fd100)
+-----------------------------------
+CRLF
+
+
+Version 0.9 on 2009-08-14 (21a9593)
+-----------------------------------
+updated for GIT
+
+
+Version 0.9 on 2009-08-13 (91a0aa5)
+-----------------------------------
+- CurlyBracketsMacros: added macros {ifset ...} & {elseifset ...}
+
+
+Version 0.9 on 2009-08-13 (ed6bb8b)
+-----------------------------------
+typos
+
+
+Version 0.9 on 2009-08-12 (7707ad8)
+-----------------------------------
+- ImageButton: fixed bug with image in container
+
+
+Version 0.9 on 2009-08-12 (f6f4525)
+-----------------------------------
+- Configurator: 'set.any_directive' renamed to 'php.any_directive' and supports auto-flatting
+
+
+Version 0.9 on 2009-08-12 (0e55ad0)
+-----------------------------------
+- Uri: fixed bug in isEqual()
+
+
+Version 0.9 on 2009-08-12 (36672e2)
+-----------------------------------
+- Form: fixed removeGroup()
+
+
+Version 0.9 on 2009-08-12 (4399734)
+-----------------------------------
+- String: added trim() for UTF-8 - TextInput: uses UTF-8 trim()
+
+
+Version 0.9 on 2009-08-12 (4c1f0fa)
+-----------------------------------
+- RobotLoader: fixed bug while rebuilding cache
+
+
+Version 0.9 on 2009-08-05 (cd43d88)
+-----------------------------------
+- Form: added method removeGroup()
+
+
+Version 0.9 on 2009-08-04 (5464e8a)
+-----------------------------------
+- Uri: fixed bug in canonicalize() (update recommended)
+
+
+Version 0.9 on 2009-08-04 (c7490b1)
+-----------------------------------
+- Control: added default helper 'escapeUrl' - TemplateHelpers: 'date' helper support both strftime() and date()
+
+
+Version 0.9 on 2009-08-04 (8fb06d4)
+-----------------------------------
+- Form: automatically adds tracker
+
+
+Version 0.9 on 2009-08-03 (ae42f74)
+-----------------------------------
+- HttpUploadedFile: no longer takes into account the sent mime-type
+
+
+Version 0.9 on 2009-08-03 (a05370a)
+-----------------------------------
+- Mail: methods addEmbeddedFile() and addAttachment() accepts file body as second parameter - BC break!!!
+
+
+Version 0.9 on 2009-08-03 (8e7ee24)
+-----------------------------------
+- LimitedScope, RobotLoaders: fixed PHP 5.3.0 bugs
+
+
+Version 0.9 on 2009-08-03 (b1e70e2)
+-----------------------------------
+- RobotLoader: cache is initialized in register() (thanks to Vitezslav Plachy) - RobotLoader: ignores all directories that begin with a period (“.”)
+
+
+Version 0.9 on 2009-08-03 (c94a1f7)
+-----------------------------------
+- Route: rejects route if FILTER_IN returns NULL (thanks to Petr Prochazka and Jan Tvrdik)
+
+
+Version 0.9 on 2009-08-03 (04f8f19)
+-----------------------------------
+- ConventionalRenderer: accepts Html object as requiredsuffix
+
+
+Version 0.9 on 2009-08-01 (aa6f080)
+-----------------------------------
+- Debug: fixed bug with content encoding in Firefox
+
+
+Version 0.9 on 2009-07-30 (3a2e8c4)
+-----------------------------------
+- CurlyBracketsMacros: fixed bug
+
+
+Version 0.9 on 2009-07-24 (a91d3f3)
+-----------------------------------
+- CurlyBracketsMacros: empty {assign} and {default} throws exception
+
+
+Version 0.9 on 2009-07-24 (ad6c3b7)
+-----------------------------------
+- LimitedScope: fix for PHP 5.3 bug #48912
+
+
+Version 0.9 on 2009-07-24 (8c5de14)
+-----------------------------------
+- typo & missing namespaces
+
+
+Version 0.9 on 2009-07-24 (fa03e64)
+-----------------------------------
+- Presenter: fixed lazy-initialized components bug (parameters are available)
+
+
+Version 0.9 on 2009-07-23 (5f391eb)
+-----------------------------------
+- CurlyBracketsMacros: improved macro {widget}, extended macro {assign} - small fixes
+
+
+Version 0.9 on 2009-07-23 (1a69a2e)
+-----------------------------------
+- Presenter: fixed forwarding bug with flashMessages & AJAX (thanks to Ondrej Hubsch)
+
+
+Version 0.9 on 2009-07-23 (3867593)
+-----------------------------------
+- CurlyBracketsFilter: refactoring
+
+
+Version 0.9 on 2009-07-23 (6bec28e)
+-----------------------------------
+- CurlyBracketsMacros: added new macro {default ...}
+
+
+Version 0.9 on 2009-07-23 (b7698da)
+-----------------------------------
+- CurlyBracketsFilter: refactoring
+
+
+Version 0.9 on 2009-07-23 (0cb2e8f)
+-----------------------------------
+- CurlyBracketsFilter: fixed bug
+
+
+Version 0.9 on 2009-07-22 (889e5b4)
+-----------------------------------
+- CurlyBracketsFilter: fixed bug
+
+
+Version 0.9 on 2009-07-22 (4342cc4)
+-----------------------------------
+- CurlyBracketsMacros: able to work without file cache
+
+
+Version 0.9 on 2009-07-22 (8f1de6e)
+-----------------------------------
+- Nette\Caching\FileStorage: works with safe_mode - Debug: profiler remembers it's position - ComponentContainer, CurlyBracketsFilter: fixed bug (thanks to PetrP, timbulko)
+
+
+Version 0.9 on 2009-07-21 (7038926)
+-----------------------------------
+- Nette\Caching\FileStorage: files are now saved to subdirectories (experimental!)
+
+
+Version 0.9 on 2009-07-21 (d6ef4d6)
+-----------------------------------
+- CurlyBracketsFilter: exceptions shows line number of template
+
+
+Version 0.9 on 2009-07-21 (d326005)
+-----------------------------------
+- Control: createComponent() is case-sensitive - typos
+
+
+Version 0.9 on 2009-07-21 (c016643)
+-----------------------------------
+- updated tests
+
+
+Version 0.9 on 2009-07-21 (77c445c)
+-----------------------------------
+- CurlyBracketsFilter: added experimental support for <tag each="..."> syntax
+
+
+Version 0.9 on 2009-07-21 (e1381a0)
+-----------------------------------
+- CurlyBracketsFilter: method parse() refactoring, divided into small methods per content
+
+
+Version 0.9 on 2009-07-21 (a0ac4d1)
+-----------------------------------
+- CurlyBracketsFilter: parser refactoring (function -> object)
+
+
+Version 0.9 on 2009-07-21 (253fadc)
+-----------------------------------
+- CurlyBracketsFilter: divided into two classes, engine in CurlyBracketsFilter and macros in new CurlyBracketsMacros
+
+
+Version 0.9 on 2009-07-21 (409fb76)
+-----------------------------------
+
+
+
+Version 0.9 on 2009-07-21 (41689a3)
+-----------------------------------
+- HttpRequest: fixed Uri vs. $_GET handling (may work without the $_GET) - Uri: fixed bug in unescape()
+
+
+Version 0.9 on 2009-07-21 (14a05b9)
+-----------------------------------
+- typos
+
+
+Version 0.9 on 2009-07-20 (02ca320)
+-----------------------------------
+- Templates: Nette\Templates\Template is BaseTemplate descendant
+
+
+Version 0.9 on 2009-07-20 (e0be4a0)
+-----------------------------------
+- added Nette\Templates\BaseTemplate
+
+
+Version 0.9 on 2009-07-20 (ef6e103)
+-----------------------------------
+- HttpResponse: added method getHeader() - Presenter: sendPayload send HTTP header 'application/json' optionally - RoutingDebugger: hidden in AJAX
+
+
+Version 0.9 on 2009-07-20 (491c1cc)
+-----------------------------------
+- CurlyBracketsFilter: fixed bug - TemplateHelpers: added helper 'NULL' - Html: supports HTML 5
+
+
+Version 0.9 on 2009-07-20 (0752f92)
+-----------------------------------
+- RoutingDebugger: converted into widget; use RoutingDebugger::enable(); (thanks to Roman Sklenar and Honza Marek) - Debug: profiler remembers if is visible
+
+
+Version 0.9 on 2009-07-19 (606054a)
+-----------------------------------
+- CurlyBracketsFilter: rewritten parsing function
+
+
+Version 0.9 on 2009-07-18 (773f6c7)
+-----------------------------------
+- Debug: small bluescreen improvement - HttpResponse: code cleanup
+
+
+Version 0.9 on 2009-07-18 (2de3339)
+-----------------------------------
+- Debug: dumps Nette Application state to blue-screen
+
+
+Version 0.9 on 2009-07-18 (8cf9720)
+-----------------------------------
+- Presenter: fixed AJAX bug causing server error
+
+
+Version 0.9 on 2009-07-18 (39777ab)
+-----------------------------------
+- Presenter: fixed AJAX bug causing server error
+
+
+Version 0.9 on 2009-07-18 (601308a)
+-----------------------------------
+- updated Skeleton
+
+
+Version 0.9 on 2009-07-18 (d23a0b3)
+-----------------------------------
+- Presenter: calling parent::startup() is required now! - Control: ArrayAccess is final again
+
+
+Version 0.9 on 2009-07-17 (011543a)
+-----------------------------------
+- Template: method subTemplate() moved to CurlyBracketsFilter::includeTemplate() - CurlyBracketsFilter: solved {include 'relative/path'} bug in extending templates
+
+
+Version 0.9 on 2009-07-17 (209d826)
+-----------------------------------
+- CurlyBracketsFilter: re-added {block $capture} support (reverted rev. 382)
+
+
+Version 0.9 on 2009-07-17 (bbae97f)
+-----------------------------------
+- TemplateHelpers: escapeJs supports Nette\Web\Html
+
+
+Version 0.9 on 2009-07-16 (c84aeaa)
+-----------------------------------
+- Presenter: beforePrepare() & prepare<View>() are deprecated!
+
+
+Version 0.9 on 2009-07-15 (ed09230)
+-----------------------------------
+- Debug: dump(), consoleDump() and fireDump() returns dumped variable - Debug: fixed deleting ouput buffer
+
+
+Version 0.9 on 2009-07-15 (f10f9b5)
+-----------------------------------
+- Debug: console can be closed by pressing ESC key (tip Jan Tvrdik)
+
+
+Version 0.9 on 2009-07-14 (7b7a7ee)
+-----------------------------------
+- example "Modules Usage" rewritten for new layout mode
+
+
+Version 0.9 on 2009-07-14 (2669eed)
+-----------------------------------
+- CurlyBracketsFilter: added support for {extends none}
+
+
+Version 0.9 on 2009-07-14 (ab5a230)
+-----------------------------------
+- Debug: blue-screen tries to delete ouput buffer (removed in rev. 222)
+
+
+Version 0.9 on 2009-07-14 (f4dc208)
+-----------------------------------
+- CD-collection example: uses PHP 5.3 closures
+
+
+Version 0.9 on 2009-07-14 (f274006)
+-----------------------------------
+- Templates: improved readability of generated PHP code
+
+
+Version 0.9 on 2009-07-14 (f7c5f06)
+-----------------------------------
+- CurlyBracketsFilter: formatString() uses double quotes / {link Dest:$var} works
+
+
+Version 0.9 on 2009-07-14 (a4efe11)
+-----------------------------------
+- CurlyBracketsFilter: '=' is not '=>' alias now
+
+
+Version 0.9 on 2009-07-14 (33c48f3)
+-----------------------------------
+- Control: ArrayAccess is temporary not final
+
+
+Version 0.9 on 2009-07-13 (dd749c0)
+-----------------------------------
+- Control: createComponent() calls factories with $name argument - String: webalize() has new parameter $lower
+
+
+Version 0.9 on 2009-07-13 (2b88e64)
+-----------------------------------
+- updated examples
+
+
+Version 0.9 on 2009-07-13 (39a4b6b)
+-----------------------------------
+- Forms: fixed getLabel & validateEqual - SelectBox: method skipFirst() can prepend new item to array of choices
+
+
+Version 0.9 on 2009-07-13 (a87dc89)
+-----------------------------------
+- Control: added ArrayAccess interface to access components
+
+
+Version 0.9 on 2009-07-13 (e2ee31d)
+-----------------------------------
+- Presenter: better HTTP redirect code detection
+
+
+Version 0.9 on 2009-07-11 (10cecd5)
+-----------------------------------
+typo
+
+
+Version 0.9 on 2009-07-11 (0ab815a)
+-----------------------------------
+- CurlyBracketsFilter: escaping inside HTML comments
+
+
+Version 0.9 on 2009-07-09 (6dd71b5)
+-----------------------------------
+- CurlyBracketsFilter: fixed {extends $layout} syntax
+
+
+Version 0.9 on 2009-07-08 (a78f83a)
+-----------------------------------
+- added Nette\Application\CliRouter - experimental router for CLI (thanks to Ondrej Novak)
+
+
+Version 0.9 on 2009-07-08 (3e223f6)
+-----------------------------------
+- Mail: added setMailer() & getMailer(); removed mailer parameter from method send() !
+
+
+Version 0.9 on 2009-07-08 (6b8adf4)
+-----------------------------------
+- Debug: error handler, profiler and consoleDump has common handler - Debug: consoleDump() sends data on shutdown (thanks to Inza)
+
+
+Version 0.9 on 2009-07-08 (fa99761)
+-----------------------------------
+- Control: implemented "smarter factory" (thanks to Mancze & team) - examples: updated to use "smarter factory"
+
+
+Version 0.9 on 2009-07-08 (8f429e4)
+-----------------------------------
+- Debug: replaced highlight_file() with highlight_string() due safemode restriction
+
+
+Version 0.9 on 2009-07-08 (82ec519)
+-----------------------------------
+- TextBase: validators really returns boolean now
+
+
+Version 0.9 on 2009-07-02 (f170910)
+-----------------------------------
+- Forms: stricter e-mail validation
+
+

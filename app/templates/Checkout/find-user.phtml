@@ -1,0 +1,49 @@
+<div class="popupBG" id="find-user" style="display:none;">
+	<div class="popupBorder">
+		<div class="popupBox">
+    	
+        <div class="popupPurpleBar">
+        	<div class="closeBtnPurple"><a href="#" onclick="sms.checkout.hide_checkout_step_1(); return false;">Cancel Checkout</a></div>
+            <h4>CHECKOUT</h4>
+
+        </div>
+        
+        <div class="transactionsBox">
+        	<table cellspacing="0" cellpadding="0" border="0" width="100%">
+            	<tr>
+                	
+                    <td valign="top" width="100%">
+                    	<div class="darkGreyBar">
+            				<p>Search for a Client</p>
+            				<div class="clear"></div>
+
+        				</div>
+												
+                        <div class="checkoutSearch">
+       					  {widget checkoutSearchForm begin}
+		            		{$control['checkoutSearchForm']['q']->control}            	
+			                <div class="checkoutSearchBtn"><a href="#" onclick="$('.checkoutSearch form').submit();" title="Search"><div class="searchIconCheckout"><img src="{$basePath}/images/icon-search-small.png" width="18" height="19" alt="Search" /></div></a></div>
+			                <div class="clear"></div>
+			 				{widget checkoutSearchForm end}                
+                            <div class="checkoutResultBoxUser qs-results-checkout" style="display:none;">
+								<div id="snippet--wideresults"></div>
+    					    </div>
+        				</div>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        
+   	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+ $('.checkoutSearch input').attr({'autocomplete':'off'})
+        	.focus()
+        	.bind('keydown', { url: {link QuickSearch:quicksearchcheckout}}, sms.quicksearch.keydown)	
+        	.bind('keyup', { url: {link QuickSearch:quicksearchcheckout}}, sms.quicksearch.keyup);
+
+        sms.quicksearch.url = {link QuickSearch:quicksearchcheckout};
+</script>

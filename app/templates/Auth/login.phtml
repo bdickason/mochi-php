@@ -1,0 +1,28 @@
+{assign robots => noindex}
+
+{block #content}
+<div class="wrapperHome">
+<div class="loginbox">
+{widget loginForm begin}
+<div>
+<div class="searchBox loginMargin">
+	<div class="searchInputUser">
+	{$control['loginForm']['username']->control}
+	</div>
+	 <div class="clear"></div>
+	
+</div>
+</div>
+	<div class="searchBox loginMargin">
+		<div class="searchInputUser">
+		{$control['loginForm']['password']->control}
+		</div>
+		 <div class="clear"></div>		
+	</div>
+<div style="clear:both;"></div>
+<div class="loginbutton">
+{$control['loginForm']['login']->control}
+</div>
+{widget loginForm end}
+</div>
+</div>

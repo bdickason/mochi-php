@@ -1,0 +1,11 @@
+{snippet appointmentresults}
+{foreach $results as $res}
+<div class="searchResult resultItem" id="res-{$res->uid}"><a href="#">{!$res->title_hl}&nbsp;&nbsp;&nbsp;<span style="font-size:12px;">{$res->phone_primary_number}</span></a></div>
+{/foreach}
+{if count($results) > 6}
+<div class="searchResult resultItem" id="res-all">Too many results, refine your search.</div>
+{/if}
+<div class="clear"></div>
+<div class="addClientBtn resultItem" id="res-add"><h3><a href="{link Profile:adduser}" title="Add New Client">Add New Client</a></h3></div>
+
+{/snippet}

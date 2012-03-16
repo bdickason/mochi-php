@@ -1,0 +1,11 @@
+[29-Jun-2010 13:59:57] PHP Warning:  require_once(PHP/Shell.php): failed to open stream: No such file or directory in /home/insitu/public_html/salon/scripts/shell.php on line 27
+[29-Jun-2010 13:59:57] PHP Fatal error:  require_once(): Failed opening required 'PHP/Shell.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/insitu/public_html/salon/scripts/shell.php on line 27
+[29-Jun-2010 15:06:46] PHP Fatal error:  Uncaught exception 'InvalidStateException' with message 'There is not section [console] in '/home/insitu/public_html/salon/app/config.ini'.' in /home/insitu/public_html/salon/libs/Nette/Config/ConfigAdapterIni.php:146
+Stack trace:
+#0 /home/insitu/public_html/salon/libs/Nette/Config/Config.php(81): ConfigAdapterIni::load('/home/insitu/pu...', 'console')
+#1 /home/insitu/public_html/salon/libs/Nette/Configurator.php(117): Config::fromFile(Array, '/home/insitu/pu...', 'console')
+#2 /home/insitu/public_html/salon/libs/Nette/Environment.php(477): Configurator->loadConfig('/home/insitu/pu...', 'console', 0)
+#3 /home/insitu/public_html/salon/app/bootstrap-shell.php(17): Environment::loadConfig(NULL)
+#4 /home/insitu/public_html/salon/scripts/shell.php(90): require_once('/home/insitu/pu...')
+#5 {main}
+  thrown in /home/insitu/public_html/salon/libs/Nette/Config/ConfigAdapterIni.php on line 146

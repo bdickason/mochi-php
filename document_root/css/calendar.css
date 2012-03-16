@@ -1,0 +1,158 @@
+.calendarContainer {
+	width:1200px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.calendarContainer .calendar {
+	float:left;	
+	position:relative;	
+}
+
+.calendarContainer .calendar .row, .calendarContainer .calendar .timeline
+{	
+	height:20px;
+	border-bottom:1px #ccc solid;
+}
+
+.calendar .row:hover
+{
+	background-color:#f1f0ae;
+}
+	
+
+.calendarContainer .calendar .timeline .hour, .calendarContainer .calendar .row .hour
+{
+	border-right:1px #ccc solid;
+	width:43px;
+	height:19px;
+	float:left;
+	font-weight:bold;
+	text-align:center;	
+	font-size:13px;	
+}
+
+.calendarContainer .calendar .timeline .half
+{
+	font-weight:normal;
+}
+
+.calendarContainer .calendar .timeline .personName, .calendarContainer .calendar .row .personName
+{
+	float:left;
+	width:190px;
+	border-right:1px #ccc solid;
+	height:19px;
+	font-size:13px;
+	font-weight:bold;
+}
+
+.calendarContainer .calendar .row .hourcell
+{
+	border-right:1px #ccc solid;
+	width:43px;
+	height:19px;
+	float:left;						
+}
+
+.calendarContainer .calendar .row .hourcell:hover
+{
+	background-color:#eee;
+}
+
+.calendarContainer .calendar .row .half
+{
+	font-weight:normal;
+	font-style:italic;
+}
+
+.calendarContainer .calendar .row .heading
+{
+	font-size:12px;						
+}
+
+.calendar .appointment
+{
+	height:16px;
+	position:absolute;
+	background-color:#58a0dd;
+	border:1px #999 solid;
+	z-index:50;
+	cursor:pointer;
+}
+
+.calendar .app-temp
+{
+	background-color:#f7f2a3;
+	border:1px #999 dashed;
+	cursor:default;
+}
+
+.calendar .app-30
+{
+	width:18px;
+}
+
+.calendar .app-60
+{
+	width:38px;
+}
+
+.calendar .app-90
+{
+	width:58px;
+}
+
+.calendar .app-120
+{
+	width:78px;
+}
+
+#smallCalendar
+{
+	display:none;
+	position:absolute;
+	z-index:210;
+}
+
+.calTopButtonBar { width: 180px; margin-left:auto; margin-right:auto; margin-bottom:15px; margin-top:15px; height:40px;}
+.calTopButtonBar .adminBtn a, .calTopButtonBar .adminBtn a:visited, .calTopButtonBar .adminBtn a:active { float:left; }
+
+.dialog
+{
+	min-height:none;
+	padding:0;						
+	position:absolute;	
+	padding:none;						
+	display:none;			
+}
+
+.dialog .header
+{
+	font-weigth:bold;
+	width:100%;
+	text-align:center;
+}
+
+.dialog .content
+{
+	margin-top:10px;
+}
+
+#app-hover
+{
+	position:absolute;
+	display:none;
+	padding:5px;
+	background-color:#f7f2a3;
+	color:#333;
+	z-index:200;
+	border:1px solid #333;
+}
+
+#app-hover span
+{
+    font-weight:bold;
+}
+					
+				

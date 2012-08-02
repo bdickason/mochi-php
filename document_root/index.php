@@ -14,4 +14,3 @@ define('LIBS_DIR', WWW_DIR . '/../libs');
 
 // load bootstrap file
 require APP_DIR . '/bootstrap.php';
-

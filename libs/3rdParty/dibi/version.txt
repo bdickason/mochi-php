@@ -1,1 +1,1 @@
-Dibi 1.3-dev (revision b00257c released on 2009-10-13)
+Dibi 1.3-dev (revision b00257c released on 2009-10-13)

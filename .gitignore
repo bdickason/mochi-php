@@ -1,2 +1,8 @@
 node_modules
 *.js
+/app/temp
+/.buildpath
+/.project
+/.settings
+/document_root/mysql.php
+/logs

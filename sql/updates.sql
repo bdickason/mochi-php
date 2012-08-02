@@ -46,3 +46,8 @@ CREATE TABLE `appointments` (
   `appointment_transaction_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`appointment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+/* 2012-08-01 Added discover as payment type */
+ALTER TABLE `transactions`
+CHANGE `transaction_payment_type` `transaction_payment_type` enum('visa','discover','mastercard','amex','check','cash','gift') COLLATE 'utf8_general_ci' NULL DEFAULT 'visa' AFTER `transaction_paid`;
+

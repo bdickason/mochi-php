@@ -1,6 +1,6 @@
 node_modules
 *.js
-/app/temp
+/app/temp/*
 /.buildpath
 /.project
 /.settings

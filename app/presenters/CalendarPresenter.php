@@ -12,16 +12,16 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$bs = $this->businessHelper->getSettings();
 
 		$config->hours = CalendarUtils::createTimeSequence($bs->getOpeningHours());
-		$config->stylists = $bs->getStylists();		
+		$config->stylists = $bs->getStylists();
 		$config->services = $bs->getServices();
 		$config->service_colors = $bs->getServiceColors();
 
 		return $config;
 	}
-	
+
 	public function actionHome($date = null)
 	{
-		//current date		
+		//current date
 		if ($date === null || $date == 'today')
 		{
 			$this->currentDate = Date('Y-m-d H:i:s');
@@ -31,12 +31,12 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 			$this->currentDate = Date('Y-m-d H:i:s', strtotime($date));
 		}
 	}
-	
+
 	protected function renderCalendar()
 	{
 		$this->setView('calendar');
 		$this->setLayout('layout-new');
-		
+
 		$config = $this->getCalendarConfig();
 
 		$stylists_index = array();
@@ -58,24 +58,24 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$this->template->stylists_json = json_encode($config->stylists);
 		$this->template->services_json = json_encode($config->services);
 		$this->template->date = Formatting::dateToJS($this->currentDate);
-				
+
 		$appts = $this->businessHelper->getAppointments()->getRawDailyData($this->currentDate, true);
 		$this->template->appts = json_encode($appts);
 	}
-	
+
 	public function renderHome()
-	{	
-		$this->renderCalendar();	
+	{
+		$this->renderCalendar();
 	}
-	
+
 	public function createComponentAddForm()
 	{
 		$form = new AppForm(null, "add");
-		
+
 		$stylists = Users::getList('uid,name', Users::TYPE_STYLIST)->fetchPairs('uid', 'name');
 		$services = Service::getActive(true);
-		
-		$form->addText('client_name', 'Client name');	
+
+		$form->addText('client_name', 'Client name');
 		$form->addHidden('date', 'Date');
 		$form->addHidden('client_uid', 'UID');
 		$form->addText('startTime', 'Start time');
@@ -84,24 +84,24 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$form->addSelect('phone_type', 'Phone types')->setItems(UserUtils::getPhoneTypes());
 		$form->addSelect('stylist', 'Stylist')->setItems($stylists);
 		$form->addSelect('service', 'Service')->setItems($services);
-				
+
 		$form->addSubmit('book', 'Book!');
-				
+
 		$form->onSubmit[] = array($this, 'onAddAppointment');
-		
+
 		return $form;
 	}
-	
+
 	public function createComponentEditForm()
 	{
 		$form = new AppForm(null, "edit");
-		
+
 		$stylists = Users::getList('uid,name', Users::TYPE_STYLIST)->fetchPairs('uid', 'name');
 		$services = Service::getActive(true);
-		
+
 		//do not set any values, its all javascript bound
 		$form->addHidden('appointment_id', 'Appointment id');
-		$form->addText('client_name', 'Client name');	
+		$form->addText('client_name', 'Client name');
 		$form->addHidden('date', 'Date');
 		$form->addHidden('client_uid', 'UID');
 		$form->addText('phone_number', 'Phone number');
@@ -110,14 +110,14 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$form->addText('endTime', 'End time');
 		$form->addSelect('stylist', 'Stylist')->setItems($stylists);
 		$form->addSelect('service', 'Service')->setItems($services);
-				
+
 		$form->addSubmit('save', 'Save!');
-		
+
 		$form->onSubmit[] = array($this, 'onEditAppointment');
-		
+
 		return $form;
 	}
-	
+
 	public function onAddAppointment($form)
 	{
 		$value = $form->getValues();
@@ -126,49 +126,49 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		//initialize the data
 		$a->appointment_stylist_uid = $value['stylist'];
 		$a->appointment_service_id = $value['service'];
-		
+
 		$a->appointment_start_date = $value['date'] . ' ' . $value['startTime'];
 		$a->appointment_end_date = $value['date'] . ' ' . $value['endTime'];
-		
+
 		$a->appointment_client_name = $value['client_name'];
-		$a->appointment_client_uid = $value['client_uid'];		
+		$a->appointment_client_uid = $value['client_uid'];
 		$a->appointment_client_phone = $value['phone_number'];
 		//$a->appointment_client_phone_type = $value['phone_type'];
-		
+
 		$a->appointment_active = true;
-		
+
 		//save!
 		$this->businessHelper->getAppointments()->save($a);
-		
-		$this->payload->success = 1;	
-		$this->payload->appointment = $a->getJSObject();	
+
+		$this->payload->success = 1;
+		$this->payload->appointment = $a->getJSObject();
 	}
-	
+
 	public function onEditAppointment($form)
 	{
 		$value = $form->getValues();
-		
+
 		$a = $this->businessHelper->getAppointments()->one($value['appointment_id']);
 		//initialize the data
 		$a->appointment_stylist_uid = $value['stylist'];
 		$a->appointment_service_id = $value['service'];
-		
+
 		$a->appointment_start_date = $value['date'] . ' ' . $value['startTime'];
 		$a->appointment_end_date = $value['date'] . ' ' . $value['endTime'];
-		
-		$a->appointment_client_name = $value['client_name'];		
+
+		$a->appointment_client_name = $value['client_name'];
 		$a->appointment_client_uid = $value['client_uid'];
 		$a->appointment_client_phone = $value['phone_number'];
-		
+
 		//$a->appointment_client_phone_type = $value['phone_type'];
-		
+
 		$a->appointment_active = true;
-		
+
 		//save!
 		$this->businessHelper->getAppointments()->save($a);
-		
-		$this->payload->success = 1;	
-		$this->payload->appointment = $a->getJSObject();	
+
+		$this->payload->success = 1;
+		$this->payload->appointment = $a->getJSObject();
 	}
 
 	public function actionUpdateAppointment($data)
@@ -196,7 +196,7 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$this->payload->success = 1;
 		$this->payload->appointment = $a->getJSObject();
 	}
-	
+
 	public function actionGetAppointments($date)
 	{
 		if ($date == 'today')
@@ -214,24 +214,24 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 			$this->payload->error = 'Incorrect date.';
 			return;
 		}
-		
+
 		$this->payload->success = 1;
 		$this->payload->appointments = $this->businessHelper->getAppointments()->getRawDailyData(Date('Y-m-d', $time), true);
 		$this->payload->currentDate = Formatting::dateToJS($date);
-		$this->payload->currentDateStr = Date('F j', $time);
+		$this->payload->currentDateStr = Date('l  F j, Y', $time);
 	}
-	
+
 	function actionDeleteAppointment($id)
 	{
 		$this->businessHelper->getAppointments()->delete($id);
-		$this->payload->success = 1;		
+		$this->payload->success = 1;
 	}
-	
+
 	public function renderGetAppointments()
 	{
 		$this->setView('calendar');
 	}
-	
+
 	public function renderDeleteAppointment()
 	{
 		$this->setView('calendar');

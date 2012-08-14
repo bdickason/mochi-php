@@ -231,6 +231,9 @@ sms.appointmentDialog.prototype.setData = function(appt)
 		this.iClientName.val(appt.appointment_client_name);
 	}
 
+	// Update the client link
+	$('#client_link').attr('href', '/?id='+appt.appointment_client_uid+'&action=edit&presenter=Profile');
+	
 	this.iID.val(appt.appointment_id);
 	this.iUID.val(appt.appointment_client_uid);
 	this.iDate.val(this.calendar.formatDate(appt.startDate));

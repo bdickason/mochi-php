@@ -76,6 +76,7 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$services = Service::getActive(true);
 
 		$form->addText('client_name', 'Client name');
+		$form->addText('email_address', 'Email Address');
 		$form->addHidden('date', 'Date');
 		$form->addHidden('client_uid', 'UID');
 		$form->addText('startTime', 'Start time');
@@ -102,6 +103,7 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		//do not set any values, its all javascript bound
 		$form->addHidden('appointment_id', 'Appointment id');
 		$form->addText('client_name', 'Client name');
+		$form->addText('email_address', 'Email Address');
 		$form->addHidden('date', 'Date');
 		$form->addHidden('client_uid', 'UID');
 		$form->addText('phone_number', 'Phone number');
@@ -133,6 +135,7 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$a->appointment_client_name = $value['client_name'];
 		$a->appointment_client_uid = $value['client_uid'];
 		$a->appointment_client_phone = $value['phone_number'];
+		$a->appointment_client_email = $value['email_address'];
 		//$a->appointment_client_phone_type = $value['phone_type'];
 
 		$a->appointment_active = true;
@@ -159,8 +162,9 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$a->appointment_client_name = $value['client_name'];
 		$a->appointment_client_uid = $value['client_uid'];
 		$a->appointment_client_phone = $value['phone_number'];
-
 		//$a->appointment_client_phone_type = $value['phone_type'];
+
+		$a->appointment_client_email = $value['email_address'];
 
 		$a->appointment_active = true;
 
@@ -187,6 +191,8 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$a->appointment_client_name = $value['appointment_client_name'];
 		$a->appointment_client_phone = $value['appointment_client_phone'];
 		//$a->appointment_client_phone_type = $value['appointment_client_phone_type'];
+
+		$a->appointment_client_email = $value['appointment_client_email'];
 
 		$a->appointment_active = true;
 

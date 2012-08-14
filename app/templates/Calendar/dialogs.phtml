@@ -11,11 +11,16 @@
             <div class="snippet--appointmentresults"></div>
             </div>
 
+            <div class="subTitleBar apptClient"><p>E-Mail Address</p></div>
+            <div class="apptClientInput inputSmall fEmailAddress">
+				{$control['addForm']['email_address']->control}
+			</div>
+
 		   <div class="subTitleBar apptClient"><p>Phone Number</p></div>
             <div class="apptClientInput inputSmall fPhoneNumber">
 				{$control['addForm']['phone_number']->control}
 			</div>
- 
+
  <div class="subTitleBar apptClient"><p>Service</p></div>
             <div class="fService">
               {$control['addForm']['service']->control}
@@ -49,7 +54,7 @@
 
             <div class="tenPxSpacer"></div>
         {widget addForm end}
-							
+
         </div>
 
 <div class="popupBox apptPopup" id="dialog-appointment-edit" style="display:none;">
@@ -65,6 +70,11 @@
 		   <div class="resultBox qs-results" style="display:none;">
             <div class="snippet--appointmentresults"></div>
             </div>
+
+            <div class="subTitleBar apptClient"><p>E-Mail Address</p></div>
+            <div class="apptClientInput inputSmall fEmailAddress">
+				{$control['addForm']['email_address']->control}
+			</div>
  <div class="subTitleBar apptClient"><p>Phone Number</p></div>
             <div class="apptClientInput inputSmall fPhoneNumber">
 				{$control['addForm']['phone_number']->control}

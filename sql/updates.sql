@@ -51,3 +51,9 @@ CREATE TABLE `appointments` (
 ALTER TABLE `transactions`
 CHANGE `transaction_payment_type` `transaction_payment_type` enum('visa','discover','mastercard','amex','check','cash','gift') COLLATE 'utf8_general_ci' NULL DEFAULT 'visa' AFTER `transaction_paid`;
 
+/* 2012-08-13 Added client email to appointments */
+ALTER TABLE `appointments`
+ADD `appointment_client_email` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `appointment_client_name`,
+COMMENT=''
+REMOVE PARTITIONING;
+

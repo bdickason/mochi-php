@@ -5,37 +5,37 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 	const QS_LARGE = 1;
 	const QS_NORMAL = 2;
 	const QS_WIDE = 3;
-	
-	const MODE_USERS = 1;	
+
+	const MODE_USERS = 1;
 	const MODE_TRANSACTIONS = 2;
-	
+
 	const MIN_AUTOCOMPLETE_LENGTH = 2;
-	
+
 	protected $searchText = null;
 	protected $listResults = null;
-	
+
 	protected $transSearchAllowed = true;
-	
+
 	protected $type = self::QS_LARGE;
-	
+
 	protected $mode = self::MODE_USERS;
 
 	const RESULT_COUNT = 3;
 
 	protected $result_limit = self::RESULT_COUNT;
-	
+
 	function actionQuickSearchHome($text)
 	{
 		$this->type = self::QS_LARGE;
 		$this->quickSearch($text);
 	}
-	
+
 	function actionQuickSearchUser($text)
 	{
 		$this->type = self::QS_NORMAL;
 		$this->quickSearch($text);
 	}
-	
+
 	function actionQuickSearchCheckout($text)
 	{
 		$this->type = self::QS_WIDE;
@@ -50,30 +50,30 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 		$this->result_limit = 6;
 		$this->quickSearch($text);
 	}
-	
+
 	function quickSearch($text)
-	{	
+	{
 		$text = preg_replace('/[^#a-z0-9 ,\-]/i', '', $text);
-		
+
 		if ($this->transSearchAllowed && preg_match('/^[#0-9]/', $text))
 		{
 			$this->mode = self::MODE_TRANSACTIONS;
 			$text = preg_replace('/^#/', '', $text);
 		}
-		
+
 		//username search has a limit
 		if (strlen($text) == 0 ||
 			($this->mode == self::MODE_USERS && strlen($text) < self::MIN_AUTOCOMPLETE_LENGTH))
-		{	
+		{
 			return;
 		}
-		
+
 		$this->searchText = $text;
 		$this->template->search = $text;
-		
-		$this->getResults();				
+
+		$this->getResults();
 	}
-	
+
 	function getResults()
 	{
 		$this->listResults = array();
@@ -89,7 +89,7 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 				break;
 			case self::MODE_USERS;
 				$res = Users::getList(
-							'uid,name,phone_primary_number',
+							'uid,name,phone_primary_number,email',
 							false,
 							$this->searchText,
 							array('name', 'ASC'),
@@ -97,23 +97,23 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 				$this->template->total = Users::$total;
 				break;
 		}
-				
+
 		foreach($res as $entry)
 		{
 			$this->listResults[] = $entry;
 		}
 	}
-	
+
 	function renderQuickSearchHome()
-	{	
-		$this->renderQuickSearch();	
-	}
-	
-	function renderQuickSearchUser()
-	{	
+	{
 		$this->renderQuickSearch();
 	}
-	
+
+	function renderQuickSearchUser()
+	{
+		$this->renderQuickSearch();
+	}
+
 	function renderQuickSearchCheckout()
 	{
 		$this->renderQuickSearch();
@@ -129,13 +129,13 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 		$this->setView('quicksearch-appointment');
 		$this->invalidateControl('appointmentresults');
 	}
-	
+
 	function renderQuickSearch()
 	{
 		$this->payload->count = count($this->listResults);
 		$this->selectView();
-		
-		
+
+
 		$this->template->results = array();
 		switch($this->mode)
 		{
@@ -146,35 +146,35 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 				$map = $this->renderUsers();
 				break;
 		}
-		
+
 		$this->payload->map = $map;
 		//add the "show all" element in the listing
 		$this->payload->showall = true;
-		
+
 		if ($this->type == self::QS_WIDE)
 		{
 			$this->invalidateControl('wideresults');
 		}
 		else
 		{
-			$this->invalidateControl('results');	
+			$this->invalidateControl('results');
 		}
 	}
-	
+
 	function renderUsers()
 	{
 		$map = array();
 		foreach($this->listResults as $res)
 		{
-			$map[] = array('eid' => $res->uid, 'title' => $res->name, 'phone' => $res->phone_primary_number);
-			
+			$map[] = array('eid' => $res->uid, 'title' => $res->name, 'phone' => $res->phone_primary_number, 'email' => $res->email);
+
 			$res->title_hl = preg_replace('/('.$this->searchText.')/i', '<strong>\\1</strong>', $res->name);
 			$this->template->results[] = $res;
 		}
-		
+
 		return $map;
 	}
-	
+
 	function selectView()
 	{
 		switch($this->type)
@@ -184,7 +184,7 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 				{
 					case self::MODE_USERS:
 						$this->setView('quicksearch');
-						break;						
+						break;
 					case self::MODE_TRANSACTIONS:
 						$this->setView('quicksearch-transactions');
 						break;
@@ -203,22 +203,22 @@ class QuickSearchPresenter extends AuthenticatedPresenter
 				break;
 			case self::QS_WIDE:
 				$this->setView('quicksearch-small-wide');
-				break;							
+				break;
 		}
 	}
-	
+
 	function renderTransactions()
-	{		
+	{
 		$map = array();
 		foreach($this->listResults as $res)
 		{
 			$map[] = array('eid' => $res->transaction_id);
-			
+
 			$res->title_hl = preg_replace('/('.$this->searchText.')/i', '<strong>\\1</strong>', $res->transaction_code);
 			$res->date = Formatting::formatDate($res->transaction_created_date);
 			$this->template->results[] = $res;
 		}
-		
+
 		return $map;
 	}
 }

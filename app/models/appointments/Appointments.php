@@ -11,20 +11,20 @@ class Appointments extends DataDomain
 	{
 		$this->businessHelper = $bh;
 	}
-	
+
 	/**
 	 * Creates an empty appointment.
-	 * 
+	 *
 	 * @return Appointment
 	 */
 	public function create()
 	{
 		return new Appointment();
 	}
-	
+
 	/**
 	 * Loads one instance of Appointment, based on its id.
-	 * 
+	 *
 	 * @param int $appointment_id
 	 * @return Appointment
 	 */
@@ -32,38 +32,39 @@ class Appointments extends DataDomain
 	{
 		$am = new AppointmentMapperDiBi();
 		$a = $am->load($appointment_id);
-		
+
 		return $a;
 	}
-	
+
 	public function delete($appointment_id)
 	{
 		$am = new AppointmentMapperDiBi();
 		$am->delete(self::one($appointment_id));
 	}
-	
+
 	public function save(Appointment $a)
 	{
 		try {
-			$client = $this->businessHelper->getClients()->one($a->appointment_client_uid);		
+			$client = $this->businessHelper->getClients()->one($a->appointment_client_uid);
 		}
 		catch(MapperNotFoundException $e)
 		{
 			//need to create this client
 			$client = $this->businessHelper->getClients()->create();
 			$client->name = $a->appointment_client_name;
+			$client->email = $a->appointment_client_email;
 			$client->phone_primary_number = $a->appointment_client_phone;
 			$client->phone_primary_type = $a->appointment_client_phone_type;
-			
+
 			$this->businessHelper->getClients()->save($client);
-			
+
 			$a->appointment_client_uid = $client->getIdentifier();
 		}
 
 		$am = new AppointmentMapperDiBi();
 		return $am->save($a);
 	}
-	
+
 	public function find($parameters)
 	{
 		if (!isset($parameters['fields']))
@@ -78,17 +79,17 @@ class Appointments extends DataDomain
 		{
 			$fields = implode(',', $parameters['fields']);
 		}
-		
+
 		$data = dibi::select($fields)->from(self::APPOINTMENTS_TABLE_NAME);
-		
+
 		if (isset($parameters['date']))
-		{			
+		{
 			$date = date('Y-m-d', strtotime($parameters['date']));
-			
+
 			$data = $data->where('appointment_start_date >= %s', $date . ' 00:00:00')
 						->where('appointment_start_date <= %s', $date . ' 23:59:59');
 		}
-		
+
 		if (isset($parameters['active']))
 		{
 			$data = $data->where('appointment_active=1');
@@ -98,7 +99,7 @@ class Appointments extends DataDomain
 		{
 			$data = $data->where('appointment_client_uid=%i', $parameters['client']);
 		}
-		
+
 		if (isset($parameters['stylist']))
 		{
 			if (is_array($parameters['stylist']))
@@ -110,7 +111,7 @@ class Appointments extends DataDomain
 				$data = $data->where('appointment_stylist_uid=%i', $parameters['stylist']);
 			}
 		}
-		
+
 		if (isset($parameters['service']))
 		{
 			if (is_array($parameters['service']))
@@ -120,7 +121,7 @@ class Appointments extends DataDomain
 			else
 			{
 				$data = $data->where('appointment_service_id=%i', $parameters['service']);
-			}			
+			}
 		}
 
 		if (isset($parameters['objects']))
@@ -137,18 +138,18 @@ class Appointments extends DataDomain
 			$result = $data;
 		}
 
-		
+
 		return $result;
 	}
-	
+
 	public function getRawDailyData($date, $js_dates = false)
 	{
 		$a_data = self::find(array('date' => $date));
-		
+
 		$appts = array();
 		foreach($a_data as $a_row)
-		{	
-			$appt = Appointments::one($a_row['appointment_id']);			
+		{
+			$appt = Appointments::one($a_row['appointment_id']);
 			if ($js_dates)
 			{
 				$appts[] = $appt->getJSObject();
@@ -158,7 +159,7 @@ class Appointments extends DataDomain
 				$appts[] = $appt->getDataObject();
 			}
 		}
-		
+
 		return $appts;
 	}
-} 
+}

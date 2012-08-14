@@ -57,7 +57,8 @@ sms.appointmentDialog = function(options)
 	this.iEndTime = $('#' + this.dialogHtmlId + ' .fEndTime input');	
 	this.iStylist = $('#' + this.dialogHtmlId + ' .fStylist select');
 	this.iService = $('#' + this.dialogHtmlId + ' .fService select');
-	this.iPhone = $('#' + this.dialogHtmlId + ' .fPhoneNumber input');	
+	this.iPhone = $('#' + this.dialogHtmlId + ' .fPhoneNumber input');
+	this.iEmail = $('#' + this.dialogHtmlId + ' .fEmailAddress input');
 	this.tError = $('#' + this.dialogHtmlId + ' .fError');	
 	this.iForm = $('#' + this.dialogHtmlId + ' form');
 	
@@ -107,11 +108,13 @@ sms.appointmentDialog.prototype.quickSearchClickHandler = function(id, data)
 	{
 		this.appt.appointment_client_uid = data.eid;
 		this.appt.appointment_client_phone = data.phone;
+		this.appt.appointment_client_email = data.email;
 	}
 	else
 	{
 		this.appt.appointment_client_uid = null;
 		this.appt.appointment_client_phone = '';
+		this.appt.appointment_client_email = '';
 	}
 
 	this.setData(this.appt);
@@ -200,19 +203,8 @@ sms.appointmentDialog.prototype.show = function(x, y)
 	
 	this.tError.html('');
 	
-	var w = this.dialog.width();
-	var h = this.dialog.height();
-	var left = Number(x) + 80;
-	if (left + w > $(window).width() - 20)
-	{
-		left = x - w - 20;
-	}
-	
-	var top = Number(y) - 200;
-	if (top + h > $(window).height() - 20)
-	{
-		top = $(window).height() - h - 40;
-	}
+	var left = ($(window).width()/2) - (this.dialog.width()/2);
+	var top = (($(window).height()/2) - (this.dialog.height()/2)) + $(window).scrollTop();
 	
 	this.dialog.css({left:left, top:top}).show();
 	this.iClientName.focus();
@@ -249,4 +241,5 @@ sms.appointmentDialog.prototype.setData = function(appt)
         
     if (appt.appointment_service_id) {this.iService.val(appt.appointment_service_id);}
 	this.iPhone.val(appt.appointment_client_phone);
+	this.iEmail.val(appt.appointment_client_email);
 };

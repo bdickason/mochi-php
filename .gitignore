@@ -6,3 +6,4 @@ node_modules
 /.settings
 /document_root/mysql.php
 /logs
+/*.DS_Store

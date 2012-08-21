@@ -5,7 +5,7 @@
             </div>
        {widget addForm begin}
 	   <div style="display:none;" class="fUID"> {$control['addForm']['client_uid']->control}</div>
-    <div class="subTitleBar apptClient"><p>Client - <a href="#" id="client_link" target="_blank">View Profile</a></p></div>
+    <div class="subTitleBar apptClient"><p>Client - <a href="#" class="client_link" target="_blank">View Profile</a></p></div>
           <div class="apptClientInput fClientName">{$control['addForm']['client_name']->control}</div>
 			 <div class="resultBox qs-results" style="display:none;">
             <div class="snippet--appointmentresults"></div>
@@ -65,7 +65,7 @@
        {widget editForm begin}
        <div style="display:none;" class="fID"> {$control['editForm']['appointment_id']->control}</div>
 	   <div style="display:none;" class="fUID"> {$control['editForm']['client_uid']->control}</div>
-    <div class="subTitleBar apptClient"><p>Client - <a href="#" id="client_link" target="_blank">View Profile</a></p></div>
+    <div class="subTitleBar apptClient"><p>Client - <a href="#" class="client_link" target="_blank">View Profile</a></p></div>
           <div class="apptClientInput fClientName">{$control['editForm']['client_name']->control}</div>
 		   <div class="resultBox qs-results" style="display:none;">
             <div class="snippet--appointmentresults"></div>

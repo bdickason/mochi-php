@@ -232,7 +232,7 @@ sms.appointmentDialog.prototype.setData = function(appt)
 	}
 
 	// Update the client link
-	$('#client_link').attr('href', '/?id='+appt.appointment_client_uid+'&action=edit&presenter=Profile');
+	$('a.client_link').attr('href', '/?id='+appt.appointment_client_uid+'&action=edit&presenter=Profile');
 	
 	this.iID.val(appt.appointment_id);
 	this.iUID.val(appt.appointment_client_uid);

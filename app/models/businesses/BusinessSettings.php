@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -23,7 +23,7 @@ class BusinessSettings {
 		$hours = new DObject();
 
 		$hours->start = '8:00';
-		$hours->end = '19:00';
+		$hours->end = '19:30';
 
 		return $hours;
 	}

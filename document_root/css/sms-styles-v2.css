@@ -1010,7 +1010,7 @@ span.smallCalIcon {
 	-moz-border-radius: 10px; 
 	-webkit-border-radius: 10px;
 	border-radius:10px;
-	width:1160px;
+	width:1201px;
 	position:relative;
 }
 
@@ -1021,7 +1021,7 @@ span.smallCalIcon {
 	-moz-border-radius: 10px; 
 	-webkit-border-radius: 10px;
 	border-radius:10px;
-	width:1120px;
+	width:1161px;
 	position:relative;
 	display:block;
 }
@@ -1331,6 +1331,14 @@ span.legendColor3 {
 	margin:0 5px 0 0;
 	display:inline-block;
 	border:1px solid #308d5b;
+}
+
+.hovering {
+    background:#ffffff;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 1);
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 255, 1); 
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 255, 1);
+    border:1px solid rgba(0,0,255, 0.8); 
 }
 
 .serviceColor1 {

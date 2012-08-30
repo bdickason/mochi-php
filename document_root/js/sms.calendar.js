@@ -218,6 +218,9 @@ sms.calendar.prototype.createAppointmentBox = function(appt)
 		.attr('id', appt.htmlId)
 		.css({ position:'absolute'});
 	
+	// Add the data attribute for the user, used for some things
+	box.addClass('client_' + appt.appointment_client_uid);
+	
 	if (appt.temporary)
 	{
 		box.addClass('app-temp');
@@ -227,7 +230,6 @@ sms.calendar.prototype.createAppointmentBox = function(appt)
 		var self = this;
 		box.click(function(evt) { self.editAppointmentClick(evt, this); });
 	}
-	
 	
 	return box;
 };
@@ -482,13 +484,19 @@ sms.calendar.prototype.fillInfoBox = function(appt)
 sms.calendar.prototype.aMouseover = function(evt, id)
 {	
 	var appt = this.findAppointment(id);	
-	this.makeHoverDiv().css({top:evt.pageY + 10, left:evt.pageX}).show();
+	this.makeHoverDiv().css({top:evt.pageY + 15, left:evt.pageX + 15}).show();
 	
 	if (this.hoverAppointment && this.hoverAppointment.appointment_id == appt.appointment_id)
 	{
 		return;
 	}
-
+	
+	// Add hover class to this appointment
+	$('#'+appt.htmlId).addClass('hovering');
+	
+	// Add hover to all related appointments
+	$('div.client_'+appt.appointment_client_uid).addClass('hovering');
+	
 	this.fillInfoBox(appt);
 	
 	this.hoverAppointment = appt;
@@ -496,6 +504,9 @@ sms.calendar.prototype.aMouseover = function(evt, id)
 
 sms.calendar.prototype.aMouseout = function(evt)
 {
+	// Remove the hovering class from all items
+	$('.appointment').removeClass('hovering');
+	
 	this.makeHoverDiv().hide();
 	this.hoverAppointment = null;
 };

@@ -48,7 +48,7 @@ sms.appointmentDialog = function(options)
 	
 	this.iID = $('#' + this.dialogHtmlId + ' .fID input');
 	this.iClientName = $('#' + this.dialogHtmlId + ' .fClientName input');
-	this.iClientName.attr({'autocomplete':'off'})
+	this.iClientName.attr({'autocomplete':'off'});
 	
 	this.iDate = $('#' + this.dialogHtmlId + ' .fDate input');
 	this.iUID = $('#' + this.dialogHtmlId + ' .fUID input');
@@ -139,7 +139,7 @@ sms.appointmentDialog.prototype.deleteHandler = function()
 		this.hide();
 		this.deleteCallback(this.appt);
 	}
-}
+};
 
 sms.appointmentDialog.prototype.updateHandler = function(data)
 {

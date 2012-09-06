@@ -8,8 +8,10 @@ sms.qs = function(options)
 	this.resultShowCallback = options.resultCallback;
 	this.followCallback = options.followCallback;
 	this.minLength = options.minLength || 3;
+	this.hoveroutTime = 7; // Seconds to wait before hiding the hover thing
 
 	this.snippetsFilled = [];
+	this.hideTimer = null;
 };
 
 sms.qs.prototype.enter = function(index) {
@@ -109,6 +111,21 @@ sms.qs.prototype.search = function(value) {
 				{
 					self.resultShowCallback(payload);
 				}
+				
+				// Bind to the target to do hiding stuff
+				self.target.mouseleave(function(e){
+					if(!self.hideTimer)
+					{
+						self.hideTimer = setTimeout("self.target.hide(); self.hideTimer = null;", (self.hoveroutTime * 1000));
+					}
+				}).mouseenter(function(e){
+					// Only clear if we have a timer active
+					if(self.hideTimer != null)
+					{
+						clearTimeout(self.hideTimer);
+						self.hideTimer = null;
+					}
+				});
 	});
 };
 

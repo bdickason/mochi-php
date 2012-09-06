@@ -171,6 +171,12 @@ sms.appointmentDialog.prototype.updateHandler = function(data)
 
 sms.appointmentDialog.prototype.saveHandler = function()
 {	
+	// If we dont have a valid client_uid we dont save
+	if(!this.appt.appointment_client_uid)
+	{
+		console.log('Missing client uid'); return;
+	}
+	
 	//prevent multiple postings
 	if (this.saving)
 	{

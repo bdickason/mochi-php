@@ -192,7 +192,7 @@ class CalendarPresenter extends QuickSearchEnabledPresenter
 		$a->appointment_client_phone = $value['appointment_client_phone'];
 		//$a->appointment_client_phone_type = $value['appointment_client_phone_type'];
 
-		$a->appointment_client_email = $value['appointment_client_email'];
+		$a->appointment_client_email = (isset($value['appointment_client_email']))?$value['appointment_client_email']:'';
 
 		$a->appointment_active = true;
 

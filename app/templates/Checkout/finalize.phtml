@@ -150,8 +150,8 @@
                             	<div class="clear"></div>
                             </div>
                             
-                            <div class="ConfirmTransaction floatLeft"><a href="{link Checkout:confirm 'transaction_id' => $transaction_id}" title="Confirm Transaction"></a></div>
-                        	<div class="GoBackMakeChanges floatLeft"><a href="{link Checkout:order 'transaction_id' => $transaction_id}" title="Go Back and Make Changes"></a></div>
+                            <div class="ConfirmTransaction floatLeft"><a href="{link Checkout:confirm 'transaction_id' => $transaction_id}" title="Confirm Transaction" class="transaction_confirm"></a></div>
+                        	<div class="GoBackMakeChanges floatLeft"><a href="{link Checkout:order 'transaction_id' => $transaction_id}" title="Go Back and Make Changes" class="transaction_decline"></a></div>
                             <div class="clear"></div>
                             
                         </div>
@@ -159,5 +159,16 @@
         		</div>
             </div>
         </div>
-
+        
+<script type="text/javascript">
+	// By default we add a check for leaving the page
+	window.onbeforeunload = function(){
+		return 'You have not confirmed this transaction. Do you still wish to leave this page?';
+	}
+	
+	// They are clicking on confirm, so let's let them leave
+	$('a.transaction_confirm').click(function(e){
+		window.onbeforeunload = null;
+	});
+</script>
 {/block}

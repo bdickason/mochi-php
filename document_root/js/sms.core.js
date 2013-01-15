@@ -744,6 +744,13 @@ sms.order = {
         		return false;
         	}
         	
+        	// Check for a payment type
+        	if($('#' + formPrefix + 'payment_type').val().length == 0)
+    		{
+        		alert('You must choose a payment method');
+        		return false;
+    		}
+        	
         	$('.transactionForm form').submit();
     	},
     	

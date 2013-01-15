@@ -455,6 +455,8 @@ class CheckoutPresenter extends ListingPresenter
 
 		$paymentTypes = BillingUtils::getPaymentTypes();
 
+        $paymentTypes = array_merge(array('' => '- Select One -',), BillingUtils::getPaymentTypes());
+
 		//add the new empty service
 
 		$service_index = 0;

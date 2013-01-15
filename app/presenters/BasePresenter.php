@@ -3,6 +3,7 @@
 abstract class BasePresenter extends Presenter
 {
 	public $oldLayoutMode = FALSE;
+	public $settings = NULL;
 
 	const DATE_CURRENT_YEAR = 'n/j';
  	const DATE_OTHER_YEAR =  'n/j/y';
@@ -19,6 +20,8 @@ abstract class BasePresenter extends Presenter
 		{
 			$this->template->user = NULL;
 		}
+		
+		$this->settings = Environment::getConfig('settings');
 	}
 	
 	public function formatDate($date, $format = false)

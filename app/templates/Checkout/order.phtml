@@ -2,13 +2,13 @@
 <div class="popupBG transactionForm">
         	<div class="popupBorder">
        		<div class="popupBox">
-       		
+
        		{if ($transaction_type == 'finalized')}
        		<div class="ReceiptHome floatLeft"><a href="{link Default:}" title="Back To Home"></a></div>
             <div class="ReceiptPrint floatLeft"><a target="_blank" href="{link Checkout:receiptPrint 'transaction_id' => $transaction_id}" title="Print Receipt"></a></div>
             <div class="clear"></div>
             {/if}
-       			
+
                 <div class="popupPurpleBar">
                 	<div class="closeBtnPurple"><a href="{if $transaction_type == 'new'}{link Default:}{else}{link Checkout:cancelTransaction 'transaction_id' => $transaction_id}{/if}" onclick="return confirm('Do you really want to {if $transaction_type == 'finalized'}{if $transaction_void}unvoid{else}void{/if}{else}cancel{/if} this transaction?');">
                 	{if $transaction_type == 'finalized'}{if $transaction_void}Unvoid{else}Void{/if} Transaction{else}Cancel Transaction{/if}
@@ -16,11 +16,11 @@
                     <h4>{if $transaction_type == 'finalized'}{if $transaction_void}VOID - {/if}TRANSACTION #{$transaction_code}{else}CHECKOUT{/if}</h4>
 
                 </div>
-                
+
                 <div class="clientName">{$client_name}</div>
             	<div class="notes"><p>Select the Services and/or Products purchased by this Client.</p></div>
-            	{snippet client}                
-				{widget transactionForm begin}				
+            	{snippet client}
+				{widget transactionForm begin}
                 <div class="form transactionsBox services">
                         <div class="darkGreyBar">
                             <p>What Services did this Client receive?</p>
@@ -31,25 +31,25 @@
                             <div class="itemRow" id="service-cont-{$i}" {if $used_service_count < $i}style="display:none;"{/if}>
                             <div class="category">
                             <div class="ltGreyBar"><p>Service</p></div>
-                                <div class="checkedInClients service"> 
+                                <div class="checkedInClients service">
                             	{$control['transactionForm']['service' . $i]->control}
                           	</div>
                             </div>
-                            
+
                             <div class="category">
                             <div class="ltGreyBar"><p>Stylist</p></div>
-                                <div class="checkedInClients stylist"> 
+                                <div class="checkedInClients stylist">
                             	{$control['transactionForm']['stylist' . $i]->control}
                           	</div>
                             </div>
-                            
+
                             <div class="pricetag">
                             	<div class="ltGreyBar"><h5>Price</h5></div>
-                                <div class="pricepoint">${$control['transactionForm']['sprice' . $i]->control}</div>
+                                <div class="pricepoint">${$control['transactionForm']['sprice' . $i]->control}{$control['transactionForm']['staxable' . $i]->control}</div>
                             </div>
-                            
+
                             <div id="rem-service-{$i}" class="deleteBtnFloat{if $used_service_count == 1 }NA{/if}"><a href="#" onclick="sms.order.removeService({$i}); return false;" title="Void This"></a></div>
-                            
+
                             <div id="add-service-{$i}" class="addNewItem" {if $i != $used_service_count}style="display:none;"{/if}>
                             <table width="100%" cellpadding="0" cellspacing="0" class="yellowBtnHolder">
                             	<tr>
@@ -57,7 +57,7 @@
                                     <td class="yellowBtnMid" onclick="sms.order.addService({$i}); return false;"><h4>+ Add Service</h4></td>
                                     <td class="yellowBtnRight"></td>
                                 </tr>
-                             </table>                             		
+                             </table>
                             </div>
                             <div class="clear"></div>
                             </div>
@@ -68,9 +68,9 @@
                                 <div class="subtotalNum" id="services_sum">$0</div>
                                 <div class="clear"></div>
                             </div>
-                            
+
                        </div>
-                        
+
                         <div class="transactionsBox form products">
                         	<div class="darkGreyBar">
                             	<p>What Products did this Client purchase?</p>
@@ -81,34 +81,35 @@
                             <div class="itemRow" id="product-cont-{$i}" {if $used_product_count < $i}style="display:none;"{/if}>
                             	<div class="category">
                             		<div class="ltGreyBar"><p>Product Name</p></div>
-                                	<div class="checkedInClients product"> 
+                                	<div class="checkedInClients product">
                             			{$control['transactionForm']['product' . $i]->control}
                           			</div>
                             	</div>
-                            	
+
                             	<div class="qty">
                             		<div class="ltGreyBar"><h5>QTY</h5></div>
-                                	<div class="checkedInClients quantity"> 
+                                	<div class="checkedInClients quantity">
                             			{$control['transactionForm']['pqty' . $i]->control}
                           			</div>
                             	</div>
-                            	
-                            
+
+
                             	<div class="category">
                             		<div class="ltGreyBar"><p>Product sold by</p></div>
-                                	<div class="checkedInClients"> 
+                                	<div class="checkedInClients">
                             			{$control['transactionForm']['user' . $i]->control}
                           			</div>
                             	</div>
-                            
+
                             	<div class="pricetag">
 
                             		<div class="ltGreyBar"><h5>Price</h5></div>
-                                	<div class="pricepoint">${$control['transactionForm']['pprice' . $i]->control}</div>
+                                	<div class="pricepoint">${$control['transactionForm']['pprice' . $i]->control}{$control['transactionForm']['ptaxable' . $i]->control}</div>
                             	</div>
-                            	
+
+
                             	<div id="rem-product-{$i}" class="deleteBtnFloat{if $used_product_count == 1 }NA{/if}"><a href="#" onclick="sms.order.removeProduct({$i}); return false;" title="Void This"></a></div>
-                            	                            	
+
                             	<div id="add-product-{$i}" class="addNewItem"  {if $i != $used_product_count}style="display:none;"{/if}>
                             		<table width="100%" cellpadding="0" cellspacing="0" class="yellowBtnHolder">
                             			<tr>
@@ -117,26 +118,26 @@
                                     		<td class="yellowBtnRight"></td>
                                 		</tr>
                              		</table>
-                            	</div>                           
-                            	<div class="clear"></div>                            	
+                            	</div>
+                            	<div class="clear"></div>
                             </div>
                             {/for}
-                            
+
                             <div>
                             	<div class="subtotalTxt">Products Subtotal:</div>
                                 <div class="subtotalNum" id="products_sum">$0</div>
                                 <div class="clear"></div>
                             </div>
 
-                            
+
                         </div>
-                        
+
                         <div class="transactionsBox form finalize">
                         	<div class="darkGreyBar">
                             	<p>Finalize Transaction</p>
                                 <div class="clear"></div>
                             </div>
-                            
+
                             <div class="itemRow">
 
                             	<div class="category">
@@ -146,38 +147,38 @@
                         				<div class="clear"></div>
                 					</div>
                             	</div>
-                            	
+
                             	<div class="finalPrice">
                             		<div class="ltGreyBar"><h5>Payment Method</h5></div>
-                                	<div class="checkedInClients"> 
+                                	<div class="checkedInClients">
                             			{$control['transactionForm']['payment_type']->control}
                           			</div>
                             	</div>
-                            	
-                            
+
+
                             	<div class="finalPrice">
 
                             		<div class="ltGreyBar"><p>Subtotal</p></div>
-                                	<div class="checkedInClients"> 
+                                	<div class="checkedInClients">
                             			<div class="pricepoint" id="subtotal">$0</div>
                           			</div>
                             	</div>
-                            
+
                             	<div class="pricetag">
                             		<div class="ltGreyBar"><h5>Taxes</h5></div>
-                                	<div class="pricepoint" id="taxes">$0</div>
+                                	<div class="pricepoint" id="taxes" style="margin-top:18px">$0</div>
 
                             	</div>
-                            
+
                             	<div class="grandTotal">
                             		<div class="purpleBarCheckout"><h5>GRAND TOTAL</h5><h4 id="grand_total">$0</h4></div>
                             	</div>
-                            
+
                             	<div class="clear"></div>
                             </div>
-                            
+
                             <div class="checkoutProceed"><a href="#" onclick="sms.order.submit(); return false;" title="Proceed to Confirmation Screen"></a></div>
-                            
+
                         </div>
 				{widget transactionForm end}
 				{/snippet}
@@ -186,9 +187,9 @@
         </div>
         <script type="text/javascript">
 		var formPrefix = 'frmtransactionForm-';
-        
+
 			{foreach $service_price_map as $id => $price}
-			sms.order.service_map[{$id}] = {$price};			
+			sms.order.service_map[{$id}] = {$price};
 			{/foreach}
 
 			{foreach $product_price_map as $id => $price}
@@ -198,9 +199,9 @@
 			sms.order.tax_ratio_services = {$tax_ratio_services};
 			sms.order.tax_ratio_products = {$tax_ratio_products};
 	        sms.order.init();
-			
-	       
-	        
-	       
+
+
+
+
         </script>
 {/block}

@@ -186,6 +186,7 @@ class CheckoutPresenter extends ListingPresenter
 
 		$services_subtotal = 0;
 		$products_subtotal = 0;
+		$taxes = 0;
 
 		foreach($entries as $entry)
 		{
@@ -202,6 +203,12 @@ class CheckoutPresenter extends ListingPresenter
 
 					$services_subtotal += $entry->transaction_entry_price_added;
 
+					// Check to see if this is taxable
+					if((bool) $entry->transaction_entry_taxable)
+					{
+					    $taxes += BillingUtils::getTax(BillingUtils::TAX_RATIO_SERVICES, $entry->transaction_entry_price_added);
+					}
+
 					$this->template->services[] = $si;
 					break;
 				case TransactionEntry::ENTRY_TYPE_PRODUCT:
@@ -216,14 +223,18 @@ class CheckoutPresenter extends ListingPresenter
 
 					$products_subtotal += $entry->transaction_entry_price_added;
 
+					// Check to see if this is taxable
+					if((bool) $entry->transaction_entry_taxable)
+					{
+					    $taxes += BillingUtils::getTax(BillingUtils::TAX_RATIO_PRODUCTS, $entry->transaction_entry_price_added);
+					}
+
 					$this->template->products[] = $pi;
 					break;
 			}
 		}
 
 		$subtotal = $services_subtotal + $products_subtotal;
-		$taxes = BillingUtils::getTax(BillingUtils::TAX_RATIO_PRODUCTS, $products_subtotal)
-				 	+ BillingUtils::getTax(BillingUtils::TAX_RATIO_SERVICES, $services_subtotal);
 
 		$grand_total = $subtotal + $taxes;
 
@@ -337,6 +348,7 @@ class CheckoutPresenter extends ListingPresenter
 			$si->service_id = $entry->transaction_entry_service_id;
 			$si->stylist_id = $entry->transaction_entry_uid;
 			$si->price = $entry->transaction_entry_price_added;
+			$si->taxable = $entry->transaction_entry_taxable;
 			$this->services[] = $si;
 			$i++;
 			$this->used_service_count++;
@@ -364,6 +376,7 @@ class CheckoutPresenter extends ListingPresenter
 			$si->uid = $entry->transaction_entry_uid;
 			$si->price = $entry->transaction_entry_price_added;
 			$si->quantity = $entry->transaction_entry_quantity;
+			$si->taxable = $entry->transaction_entry_taxable;
 			$this->products[] = $si;
 			$i++;
 			$this->used_product_count++;
@@ -392,7 +405,10 @@ class CheckoutPresenter extends ListingPresenter
 
 		foreach($prices as $entry)
 		{
-			$map[$entry->service_id . '_' . $entry->uid] = $entry->service_price;
+			$map[$entry->service_id . '_' . $entry->uid] = array(
+			            'price' => $entry->service_price,
+			            'taxable' => (int) $entry->taxable,
+			        );
 		}
 
 		return $map;
@@ -405,7 +421,10 @@ class CheckoutPresenter extends ListingPresenter
 
 		foreach($prices as $entry)
 		{
-			$map[$entry->product_id] = $entry->product_price;
+			$map[$entry->product_id] = array(
+			            'price' => $entry->product_price,
+			            'taxable' => (int) $entry->taxable,
+			        );
 		}
 
 		return $map;
@@ -447,6 +466,7 @@ class CheckoutPresenter extends ListingPresenter
 			$form->addSelect('service' . $service_index, 'Service ' . $service_index)->setItems($services, true)->skipFirst()->setValue($service->service_id);
 			$form->addSelect('stylist' . $service_index, 'Stylist ' . $service_index)->setItems($stylists, true)->skipFirst()->setValue($service->stylist_id);
 			$form->addText('sprice' . $service_index, 'Price '. $service_index)->setValue($service->price);
+			$form->addHidden('staxable' . $service_index)->setValue($service->taxable);
 		}
 
 		$product_index = 0;
@@ -462,6 +482,7 @@ class CheckoutPresenter extends ListingPresenter
 			$form->addSelect('pqty' . $product_index, 'QTY ' . $product_index)->setItems($qty, true)->setValue($product->quantity);
 			$form->addSelect('user' . $product_index, 'Stylist ' . $product_index)->setItems($users, true)->skipFirst()->setValue($product->uid);
 			$form->addText('pprice' . $product_index, 'Price '. $product_index)->setValue($product->price);
+			$form->addHidden('ptaxable' . $product_index)->setValue($product->taxable);
 		}
 
 		if ($this->transaction instanceof Transaction)
@@ -498,6 +519,7 @@ class CheckoutPresenter extends ListingPresenter
 				$si->service_id = $data['service'.$i];
 				$si->stylist_id = $data['stylist'.$i];
 				$si->price = $data['sprice'.$i];
+				$si->taxable = $data['staxable'.$i];
 
 				$this->services[] = $si;
 			}
@@ -512,6 +534,7 @@ class CheckoutPresenter extends ListingPresenter
 				$pi->uid = $data['user' . $i];
 				$pi->price = $data['pprice' . $i];
 				$pi->quantity = $data['pqty' . $i];
+				$pi->taxable = $data['ptaxable'.$i];
 
 				$this->products[] = $pi;
 			}

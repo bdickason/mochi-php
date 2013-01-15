@@ -57,3 +57,18 @@ ADD `appointment_client_email` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER
 COMMENT=''
 REMOVE PARTITIONING;
 
+/* 2013-01-03 Added taxable column to products */
+ALTER TABLE `products` CHANGE `product_price` `product_price` float(5,2) NOT NULL DEFAULT '0' AFTER `product_sku`,
+ADD `taxable` tinyint(1) unsigned NOT NULL DEFAULT '1' AFTER `product_active`, COMMENT='';
+
+/* 2013-01-03 Added taxable column to services_users */
+ALTER TABLE `services_users` ADD `taxable` tinyint(1) unsigned NULL DEFAULT '1' AFTER `active`, COMMENT='';
+
+/* 2013-01-03 Update specific products to not be taxable */
+UPDATE `products` SET `product_id` = '177', `product_name` = 'Shipping', `product_sku` = 'ship', `product_price` = '0.00', `last_updated` = now(), `product_active` = '1', `taxable` = '0' WHERE `product_id` = '177' COLLATE utf8_bin LIMIT 1;
+
+/* 2013-01-03 Added Gift cards to products */
+INSERT INTO `products` (`product_name`, `product_sku`, `product_price`, `last_updated`, `product_active`, `taxable`) VALUES ('Giftcard', 'giftcard', '0.00', now(), '1', '0');
+
+/* 2013-01-03 Add Taxable to transaction entries */
+ALTER TABLE `transactions_entries` ADD `transaction_entry_taxable` tinyint(1) unsigned NOT NULL DEFAULT '1' AFTER `transaction_entry_quantity`, COMMENT='';

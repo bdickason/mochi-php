@@ -389,6 +389,7 @@ sms.order = {
     			$('#' + formPrefix + 'service' + i).val($('#' + formPrefix + 'service' + (i + 1)).val());
     			$('#' + formPrefix + 'stylist' + i).val($('#' + formPrefix + 'stylist' + (i + 1)).val());
     			$('#' + formPrefix + 'sprice' + i).val($('#' + formPrefix + 'sprice' + (i + 1)).val());
+    			$('#' + formPrefix + 'staxable' + i).val($('#' + formPrefix + 'staxable' + (i + 1)).val());
     		}
     		
     		if (i > 1)
@@ -404,6 +405,7 @@ sms.order = {
     		$('#' + formPrefix + 'service' + i).val('');
     		$('#' + formPrefix + 'sprice' + i).val('0.00');
     		$('#' + formPrefix + 'stylist' + i).val('');
+    		$('#' + formPrefix + 'staxable' + i).val(1);
     		
     		sms.order.recalculate();    		
     	},
@@ -432,6 +434,7 @@ sms.order = {
     			$('#' + formPrefix + 'user' + i).val($('#' + formPrefix + 'user' + (i + 1)).val());
     			$('#' + formPrefix + 'pprice' + i).val($('#' + formPrefix + 'pprice' + (i + 1)).val());
     			$('#' + formPrefix + 'pqty' + i).val($('#' + formPrefix + 'pqty' + (i + 1)).val());
+    			$('#' + formPrefix + 'ptaxable' + i).val($('#' + formPrefix + 'ptaxable' + (i + 1)).val());
     		}
     		
     		//dont hide first row
@@ -449,6 +452,7 @@ sms.order = {
     		$('#' + formPrefix + 'pprice' + i).val('0.00');
     		$('#' + formPrefix + 'user' + i).val('');
     		$('#' + formPrefix + 'pqty' + i).val(1);
+    		$('#' + formPrefix + 'ptaxable' + i).val(1);
     		
     		sms.order.recalculate();
     	},
@@ -470,6 +474,9 @@ sms.order = {
     		
     		$('#' + formPrefix + 'sprice' + id).val(sms.order.round(price));
     		
+    		// Set the item's taxable state
+    		$('#' + formPrefix + 'staxable' + id).val(sms.order.getServiceIsTaxable(i1));
+    		
     		sms.order.recalculate();
     	},
     	
@@ -489,6 +496,9 @@ sms.order = {
         	var price = sms.order.getProductPrice(i1) * i2;
         	
         	$('#' + formPrefix + 'pprice' + id).val(sms.order.round(price));
+        	
+        	// Set the item's taxable state
+        	$('#' + formPrefix + 'ptaxable' + id).val(sms.order.getProductIsTaxable(i1));
 
         	sms.order.recalculate();
     	},
@@ -515,33 +525,63 @@ sms.order = {
 
     	recalculate : function()
     	{
-        	var services_sum = 0;
-        	var products_sum = 0;
-        	        	
-        	$('.services .pricetag input:visible').each(function() { services_sum += Number(this.value); });
-        	$('.products .pricetag input:visible').each(function() { products_sum += Number(this.value); });
-        	
-        	$('#services_sum').html('$' + this.round(services_sum));
+    		var taxes = 0,
+    			services_sum = 0,
+            	products_sum = 0;
+    		
+    		
+    		// Loop thru all of the services and determine the taxable amount
+    		$('.services .pricetag input:visible').each(function() {
+    			
+    				// Get the price for the service line item
+    				var price = Number(this.value);
+    			
+    				// We always add to the sub_total
+    				services_sum += price;
+    				
+    				// We have to collect tax on this service
+    				if($(this).next(':input').val() != 0)
+    				{
+    					taxes += sms.order.get_tax(sms.order.tax_ratio_services, price);
+    				}
+    			});
+    		
+    		// Loop thru all of the products and determine the taxable amount
+    		$('.products .pricetag input:visible').each(function() {
+    			
+	    			// Get the price for the product line item
+					var price = Number(this.value);
+				
+					// We always add to the sub_total
+					products_sum += price;
+					
+    				// We have to collect tax on this product
+    				if($(this).next(':input').val() != 0)
+    				{
+    					taxes += sms.order.get_tax(sms.order.tax_ratio_products, price);
+    				}
+    			});
+    		
+    		$('#services_sum').html('$' + this.round(services_sum));
         	$('#products_sum').html('$' + this.round(products_sum));
-        	
-        	var subtotal = Number(services_sum) + Number(products_sum);
-        	
-        	$('#subtotal').html('$' + this.round(subtotal));
-        	
-        	var taxes = this.get_tax(this.tax_ratio_services, services_sum)
-						+ this.get_tax(this.tax_ratio_products, products_sum);
-        	
-        	var total = subtotal + taxes;
-        	
-        	$('#taxes').html('$' + this.round(taxes));
-        	$('#grand_total').html('$' + this.round(total));
+    		
+    		//console.log(tax_total);
+    		
+    		// Update the sub-total
+    		$('#subtotal').html('$' + this.round(services_sum + products_sum));
+    		
+    		// Update the total taxes
+    		$('#taxes').html('$' + this.round(taxes));
+    		
+    		// Update the grand total
+    		$('#grand_total').html('$' + this.round(taxes + services_sum + products_sum));
     	},
 
     	getServicePrice: function(service_id, stylist_id)
     	{    		
         	if (this.service_map[service_id + '_' + stylist_id])
         	{
-            	return this.service_map[service_id + '_' + stylist_id];
+            	return this.service_map[service_id + '_' + stylist_id]['price'];
         	}
         	else
         	{
@@ -549,15 +589,40 @@ sms.order = {
         	}
     	},
     	
+    	getServiceIsTaxable: function(service_id, stylist_id)
+    	{    		
+        	if (this.service_map[service_id + '_' + stylist_id])
+        	{
+        		console.log(this.service_map[service_id + '_' + stylist_id]);
+            	return this.service_map[service_id + '_' + stylist_id]['taxable'];
+        	}
+        	else
+        	{
+            	return 1;
+        	}
+    	},
+    	
     	getProductPrice: function(product_id)
     	{
     		if (this.product_map[product_id])
     		{
-    			return this.product_map[product_id];
+    			return this.product_map[product_id]['price'];
     		}
     		else
     		{
     			return 0;
+    		}
+    	},
+    	
+    	getProductIsTaxable: function(product_id)
+    	{
+    		if (this.product_map[product_id])
+    		{
+    			return this.product_map[product_id]['taxable'];
+    		}
+    		else
+    		{
+    			return 1;
     		}
     	},
 

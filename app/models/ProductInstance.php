@@ -6,4 +6,5 @@ class ProductInstance
 	public $uid = false;
 	public $price = false;
 	public $quantity = 1;
+	public $taxable = false;
 }

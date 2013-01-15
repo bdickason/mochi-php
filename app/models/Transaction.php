@@ -6,39 +6,39 @@ class Transaction extends DBO
 {
 	protected $services = array();
 	protected $products = array();
-	
+
 	function __construct($transaction_id = false)
-	{	
+	{
 		$this->table_name = 'transactions';
 		$this->pkey_name = 'transaction_id';
-		
-		parent::__construct($transaction_id);	 
+
+		parent::__construct($transaction_id);
 	}
-	
+
 	protected function generateTransactionCode()
 	{
 		//generate "next transaction number for this month"
 		$code = dibi::select('count(*)')
 			->from($this->table_name)
-			->fetchSingle();		
-		
+			->fetchSingle();
+
 		$code++;
-			
+
 		while($this->findTransactionByCode($code) !== false)
 		{
 			$code++;
 		}
-		
+
 		return $code;
 	}
-	
+
 	protected function findTransactionByCode($code)
 	{
 		$id = dibi::select('count(*)')
 			->from($this->table_name)
 			->where('transaction_code=%s', $code)
 			->fetchSingle();
-			
+
 		if (empty($id) || $id < 1)
 		{
 			return false;
@@ -48,7 +48,7 @@ class Transaction extends DBO
 			return $id;
 		}
 	}
-	
+
 	public function __get($name)
 	{
 		switch($name)
@@ -77,26 +77,26 @@ class Transaction extends DBO
 				return parent::__get($name);
 		}
 	}
-	
+
 	static public function updateTransaction($tid, $uid, $services, $products, $payment_type)
 	{
 		$data = Environment::getUser()->getIdentity()->getData();
 		//copy the transaction, if something goes wrong, we dont lose the old transaction
-		
+
 		$t_old = new Transaction($tid);
-		
+
 		$t_new_id = Transaction::createNewTransaction($uid, $services, $products, $payment_type, $t_old);
-		
+
 		$t_new = new Transaction($t_new_id);
 		//set updated
-		$t_new->transaction_updated_uid = $data['uid'];		
+		$t_new->transaction_updated_uid = $data['uid'];
 		$t_new->save();
-		
+
 		$t_old->delete();
-		
+
 		return $t_new->id;
 	}
-	
+
 	public function delete()
 	{
 		//delete all entries of this transaction
@@ -106,14 +106,14 @@ class Transaction extends DBO
 			$te = new TransactionEntry($entry->transaction_entry_id);
 			$te->delete();
 		}
-		
+
 		parent::delete();
 	}
-	
+
 	public function void()
 	{
 		$data = Environment::getUser()->getIdentity()->getData();
-		
+
 		if ($this->transaction_void == 1)
 		{
 			$this->transaction_void = 0;
@@ -124,18 +124,22 @@ class Transaction extends DBO
 		{
 			$this->transaction_void = 1;
 			$this->transaction_void_by_uid = $data['uid'];
-			$this->transaction_void_date = Date('Y-m-d H:i:s');	
+			$this->transaction_void_date = Date('Y-m-d H:i:s');
 		}
-		
+
 		$this->save();
 	}
-	
+
 	static public function createNewTransaction($uid, $services, $products, $payment_type, Transaction $init = null)
 	{
 		$data = Environment::getUser()->getIdentity()->getData();
-		
+
 		$t = new Transaction();
-		
+
+		// Init
+		$price = 0.00;
+		$taxes = 0.00;
+
 		//initialize by existing data?
 		if ($init instanceof Transaction)
 		{
@@ -146,8 +150,8 @@ class Transaction extends DBO
 			$t->transaction_paid = $init->transaction_paid;
 			$t->transaction_finalized = $init->transaction_finalized;
 			$t->transaction_void = $init->transaction_void;
-			$t->transaction_void_by_uid = $init->transaction_void_by_uid;			
-			$t->transaction_code = $init->transaction_code;			
+			$t->transaction_void_by_uid = $init->transaction_void_by_uid;
+			$t->transaction_code = $init->transaction_code;
 		}
 		else
 		{
@@ -157,16 +161,15 @@ class Transaction extends DBO
 			$t->transaction_updated_date = $t->transaction_created_date;
 			$t->transaction_paid = 0;
 			$t->transaction_finalized = 0;
-			$t->transaction_void = 0;			
+			$t->transaction_void = 0;
 		}
-		
+
 		$t->transaction_payment_type = $payment_type;
-		
+
 		$stylist_names = array();
 		$product_names = array();
-		
-		$price = 0;
-		
+
+		// We are updating this transaction
 		if ($t->save())
 		{
 			foreach($services as $service)
@@ -178,16 +181,22 @@ class Transaction extends DBO
 				$te->transaction_entry_service_id = $service->service_id;
 				$te->transaction_entry_price_added = $service->price;
 				$te->transaction_entry_date_added = $t->transaction_created_date;
-				
+				$te->transaction_entry_taxable = $service->taxable;
+
 				$te->save();
-				
+
 				$price += $service->price;
-				$services_sum += $service->price;
-				
+
+				// We have to get taxes for this service
+				if($service->taxable)
+				{
+				    $taxes += BillingUtils::getTax(BillingUtils::TAX_RATIO_SERVICES, $service->price);
+				}
+
 				$user = new Users($service->stylist_id);
 				$stylist_names[] = $user->name;
 			}
-			
+
 			foreach($products as $product)
 			{
 				$te = new TransactionEntry();
@@ -198,31 +207,37 @@ class Transaction extends DBO
 				$te->transaction_entry_price_added = $product->price;
 				$te->transaction_entry_date_added = $t->transaction_created_date;
 				$te->transaction_entry_quantity = $product->quantity;
-				
+				$te->transaction_entry_taxable = $product->taxable;
+
 				$te->save();
-				
+
 				$price += $product->price;
-				$products_sum += $product->price;
-				
+
+				// We have to get taxes for this service
+				if($product->taxable)
+				{
+				    $taxes += BillingUtils::getTax(BillingUtils::TAX_RATIO_PRODUCTS, $product->price);
+				}
+
 				$product = new Product($product->product_id);
 				$product_names[] = $product->product_name;
 			}
 		}
-		
+
 		$user = new Users($t->transaction_uid);
-		
+
 		$stylist_names = array_unique($stylist_names);
 
-		//add tax
-		$t->transaction_total = BillingUtils::getTotal($services_sum, $products_sum);
+		// Make the total for the entire transaction
+		$t->transaction_total = $price + $taxes;
 		$t->transaction_stylists = implode(', ', $stylist_names);
 		$t->transaction_products = implode(', ', $product_names);
 		$t->transaction_client_name = $user->name;
-		$t->save(); 
-		
+		$t->save();
+
 		return $t->id;
 	}
-	
+
 	public function save()
 	{
 		if (empty($this->transaction_code))
@@ -231,52 +246,52 @@ class Transaction extends DBO
 		}
 		return parent::save();
 	}
-	
+
 	static public function getList($fields, $search = false, $order = array('transaction_code', 'DESC'), $limit = false, $offset = false)
 	{
 		$data = dibi::select($fields)->from('transactions')->where('transaction_finalized=1');
-				
+
 		if ($search !== false && !empty($search))
 		{
 			$data = $data->where('transaction_code')->like('%s', $search.'%');
 		}
-		
+
 		self::$total = count($data);
-		
+
 		if (is_array($order) && count($order) == 2 && $order[0] !== false && $order[1] !== false)
 		{
 			$data = $data->orderBy($order[0] . ' ' . $order[1]);
 		}
-		
+
 		if ($limit !== false)
 		{
 			$data = $data->limit($limit . ',' . $offset);
 		}
-		
+
 		return $data;
 	}
-	
+
 	static public function getListByUser($fields, $search, $uid, $order = array('transaction_code', 'DESC'), $offset = false, $limit = false)
 	{
 		$data = dibi::select($fields)->from('transactions')->where('transaction_uid=%i', $uid)->where('transaction_finalized=1');
-				
+
 		if ($search !== false && !empty($search))
 		{
 			$data = $data->where('transaction_code')->like('%s', $search.'%');
 		}
-		
+
 		self::$total = count($data);
-		
+
 		if (is_array($order) && count($order) == 2 && $order[0] !== false && $order[1] !== false)
 		{
 			$data = $data->orderBy($order[0] . ' ' . $order[1]);
 		}
-		
+
 		if ($offset !== false)
 		{
 			$data = $data->limit($offset . ',' . $limit);
 		}
-		
+
 		return $data;
 	}
 }

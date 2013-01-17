@@ -336,6 +336,7 @@ class CheckoutPresenter extends ListingPresenter
 				$si->service_id = $a->appointment_service_id;
 				$si->stylist_id = $a->appointment_stylist_uid;
 				$si->price = 0;
+				$si->taxable = 1;
 				$this->services[] = $si;
 				$this->used_service_count++;
 			}

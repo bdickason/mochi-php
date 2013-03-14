@@ -2,48 +2,49 @@
 {include "../Checkout/find-user.phtml"}
 <!-- START CLIENT AND SERVICE DETAILS -->
 	<div class="userWrapper">
-        	
+
    	  <div class="searchBoxUser">
         {widget searchForm begin}
-        	{$control['searchForm']['q']->control}            	
+        	{$control['searchForm']['q']->control}
             <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
             <div class="clear"></div>
         {widget searchForm end}
         </div>
         <div class="userResultWrapper qs-results" style="display:none;">
 	    	<div class="resultBoxUser">
-	            <div id="snippet--results" ></div>            
+	            <div id="snippet--results" ></div>
 	 		</div>
 			<div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
-		</div>	
+		</div>
         <div class="checkoutBtnUser floatRight"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
         <div class="clear"></div>
         </div>
-	
+
     	<div class="userWrapper">
 
         	<div class="popupBox">
             	{if $searching }
-                <div class="popupHdrBar">                	
+                <div class="popupHdrBar">
                     <h4>Search Results: User</h4>
                 </div>
-                
+
                 <div class="clientName">
-                {$search}                
+                {$search}
                 </div>
             	<div class="notes"><p>{$num_results} results</p></div>
             	<script type="text/javascript">
 
         $('.searchBoxUser input').attr({'autocomplete':'off'})
         	.focus()
-        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+        	.focusout(sms.quicksearch.hide)
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)
         	.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
 
         sms.quicksearch.url = {link QuickSearch:quicksearchuser};
 
         </script>
 				{/if}
-                
+
                 <div class="transactionsBox">
 						<ul class="purpleBar">
                         	<li>
@@ -54,7 +55,7 @@
 
                             </li>
                         </ul>
-                        {foreach $users as $user}						
+                        {foreach $users as $user}
                         <ul class="row{if ($iterator->isOdd())}White{else}Grey{/if}">
                             <li>
                                 <a href="{link Profile:edit 'id'=>$user->uid}">
@@ -64,7 +65,7 @@
 
                                 </a>
                                 <div onclick='location.href={link Profile:edit id=>$user->uid}' class="editBtns">
-                                	
+
                                     <table cellpadding="0" cellspacing="0" class="yellowBtnHolder floatRight">
                                         <tr>
                                             <td class="yellowBtnLeft"></td>
@@ -92,10 +93,10 @@
                                     <td width="780"  class="pagination">
                                     {if $page == 0}1{else}<a href="{link Profile:search 'search' => $search, 'page' => 0, 'order' => $order}">1</a>{/if}
                                     {if $page > 6}...{/if}
-                                    {for $i=($page - 6 < 0 ? 1 : $page - 6); $i < ($page + 6 > $max_page - 1 ? $max_page - 1 : $page + 6); $i++} 
+                                    {for $i=($page - 6 < 0 ? 1 : $page - 6); $i < ($page + 6 > $max_page - 1 ? $max_page - 1 : $page + 6); $i++}
                                     {if $i == $page}{$i + 1}{else}<a href="{link Profile:search 'search' => $search, 'page' => $i, 'order' => $order}">{$i+1}</a>{/if}
-                                    {/for} 
-                                    {if $page < $max_page - 7}...{/if}                                  
+                                    {/for}
+                                    {if $page < $max_page - 7}...{/if}
                                     {if $page == $max_page - 1}{$max_page}{else}<a href="{link Profile:search 'search' => $search, 'page' => $max_page - 1, 'order' => $order}">{$max_page}</a>{/if}
                                     </td>
                                     <td width="130"><div class="nextPage"><a href="{link Profile:search 'search' => $search,'page' => $page_next, 'order' => $order}" title="Next Page">Next Page &nbsp;<img src="{$basePath}/images/right-white-arrow.png" alt="Next Page"></a></div></td>
@@ -105,7 +106,7 @@
 
                     	{/if}
        		  		</div>
-            	</div>	
+            	</div>
             <div class="clear"></div>
 
 		</div>

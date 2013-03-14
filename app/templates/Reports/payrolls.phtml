@@ -5,84 +5,85 @@
     	<div class="userResultWrapper qs-results" style="display:none;">
     	<div class="resultBoxUser">
             <div id="snippet--results" ></div>
-            
+
 		 </div>
 		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
-		 </div>	 
+		 </div>
     	<div class="searchBoxUser">
          {widget searchForm begin}
-		            	{$control['searchForm']['q']->control}            	
+		            	{$control['searchForm']['q']->control}
 		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
 		                <div class="clear"></div>
-		 {widget searchForm end} 
-		 </div>		 
-		 
+		 {widget searchForm end}
+		 </div>
+
    	  	 <div class="checkoutBtnUser floatRight"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
-         
-         <div class="clear"></div>	
-		 
+
+         <div class="clear"></div>
+
         </div>
-        
+
         <script type="text/javascript">
 
         $('.searchBoxUser input').attr({'autocomplete':'off'})
         	.focus()
-        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+        	.focusout(sms.quicksearch.hide)
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)
 			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
 
         sms.quicksearch.url = {link QuickSearch:quicksearchuser};
 
         </script>
     <!-- END TOP SEARCH AND CHECKOUT -->
-    
+
     <!-- START CLIENT AND SERVICE DETAILS -->
     	<div class="userWrapper">
 
         	<div class="popupBox">
-            	
+
             	{include 'navigation.phtml'}
-            	
-                <div class="popupHdrBar">                	
+
+                <div class="popupHdrBar">
                     <h4>Payroll report</h4>
                 </div>
-                                
-                <div class="transactionsBox">					                    
+
+                <div class="transactionsBox">
                     {widget filterForm begin}
-                    
+
                     <table width="100%">
-                    
+
                     <tr>
                     	<th width="200" align="left">Stylist</th>
                     	<td style="width:450px;" class="greySmallBox">{$control['filterForm']['stylist']->control} select stylist or leave to see all stylists</td>
                     </tr>
-                    
+
                     <tr>
                     	<th align="left">Date</th>
                     	<td id="datepicker" style="width:650px;" class="greySmallBox">{$control['filterForm']['date']->control} use dd/mm/YYYY notation</td>
                     </tr>
-                    
+
                     <tr>
                     	<td colspan="2">
                     	<br/>
                     		{$control['filterForm']['show']->control}
                     	</td>
                     </tr>
-                    
+
                     </table>
-                    
-                    	
+
+
                     {widget filterForm end}
-                    
+
                     {if $show_payroll}
-                    
+
                     <br/><br/>
-                    
+
                     <p style="font-size:16px;">
                     Showing week: <strong>{$presenter->formatDate($start_date)} - {$presenter->formatDate($end_date)}</strong>
                     </p>
-                    
-                    
-                    
+
+
+
                     <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                     	<tr style="border-bottom:1px black solid;">
                     		<th>Stylist name</th>
@@ -98,20 +99,20 @@
                     		<td align="right" width="200">${$presenter->formatPrice($result['total'])}</td>
                     	</tr>
                     	{/foreach}
-                    	
+
                     	<tr style="border-top:1px black solid;">
                     		<th>TOTAL</th>
                     		<th align="right" width="200">${$presenter->formatPrice($totals['retail'])}</th>
                     		<th align="right" width="200">${$presenter->formatPrice($totals['service'])}</th>
                     		<th align="right" width="200">${$presenter->formatPrice($totals['total'])}</th>
                     	</tr>
-                    	
+
                     </table>
                     {if $showing_transactions }
                     <br/><br/>
                     <strong>Persons transactions</strong>
                     <br/><br/>
-                                       
+
                      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
                      	<tr style="border-bottom:1px black solid;">
                     		<th width="100" align="center">Tran #</th>
@@ -133,17 +134,17 @@
                     {/if}
                     <br/><br/>
                     * Note: all amounts are shown pre-tax.
-                    
+
 					{/if}
        		  	</div>
-            </div>	
-            <div class="clear"></div>			
+            </div>
+            <div class="clear"></div>
 		</div>
 		<script type="text/javascript">
 		$(function() {
 			$("#datepicker input").datepicker();
 		});
-	
+
 		</script>
 <!-- END CLIENT AND SERVICE DETAILS -->
 

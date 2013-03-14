@@ -1,40 +1,41 @@
 {block #content}
-    
+
     <!-- START TOP SEARCH AND CHECKOUT -->
     	<div class="userWrapper">
     	<div class="userResultWrapper qs-results" style="display:none;">
     	<div class="resultBoxUser">
             <div id="snippet--results" ></div>
-            
+
 		 </div>
 		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
-		 </div>	 
+		 </div>
     	<div class="searchBoxUser">
          {widget searchForm begin}
-		            	{$control['searchForm']['q']->control}            	
+		            	{$control['searchForm']['q']->control}
 		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
 		                <div class="clear"></div>
-		 {widget searchForm end} 
-		 </div>		 
+		 {widget searchForm end}
+		 </div>
 		 {if $euser['type'] == 'client'}
    	  	    <div class="checkoutBtnUser floatRight"><a href="{link Checkout:order 'uid' => $uid,'transaction_id' => null}" title="Checkout"></a></div>
-            
+
 		 {/if}
-		 <div class="clear"></div>	
-		 
+		 <div class="clear"></div>
+
         </div>
-        
+
         <script type="text/javascript">
 
         $('.searchBoxUser input').attr({'autocomplete':'off'})
         	.focus()
-        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+        	.focusout(sms.quicksearch.hide)
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)
 			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
 
         sms.quicksearch.url = {link QuickSearch:quicksearchuser};
 
         </script>
-        
+
     <!-- END TOP SEARCH AND CHECKOUT -->
 
 {if $saved}
@@ -60,25 +61,25 @@ The user data has been saved.
                     <td class="userLeftCol">
                         <div class="ltYellowBar">
                         	User type:
-                        	{$control['userForm']['type']->control}                          
+                        	{$control['userForm']['type']->control}
                             <div class="clear"></div>
                         </div>
-                    	
+
                         <div class="clientName fieldSizeLarge">{$control['userForm']['name']->control}</div>
                         <div class="notes"><p>{$control['userForm']['notes']->control}</p></div>
-                        
+
                          <div class="greyBigBox">
 
                         	<div class="darkGreyBar">
                             	<p>E-mail</p>
                                 <div class="clear"></div>
                             </div>
-                            
+
                             <div class="email fieldSizeMedium">{$control['userForm']['email']->control}</div>
 
                         </div>
-                        
-                        
+
+
                         <div class="greySmallBox">
                         	<div class="darkGreyBar">
                             	<div class="floatRight">
@@ -87,12 +88,12 @@ The user data has been saved.
                             	<p>Phone Number</p>
                                 <div class="clear"></div>
                             </div>
-                            
+
                             <div class="phoneNum fieldSizeMedium">{$control['userForm']['phone_primary_number']->control}</div>
                         </div>
-                        
+
                         <div class="spacer19px"></div>
-                        
+
                          <div class="greySmallBox">
                         	<div class="darkGreyBar">
                             	<div class="floatRight">
@@ -101,93 +102,93 @@ The user data has been saved.
                             	<p>Secondary Phone Number</p>
                                 <div class="clear"></div>
                             </div>
-                            
+
                             <div class="phoneNum fieldSizeMedium">{$control['userForm']['phone_secondary_number']->control}</div>
                         </div>
-                        	
+
                         <div class="greyBigBox">
 
                         	<div class="darkGreyBar">
                             	<p>Mailing Address</p>
                                 <div class="clear"></div>
                             </div>
-                            
+
                             <div class="address">
                             	<div class="ltGreyBar"><p>Street Address</p></div>
                                 <div class="addressTxt fieldSizeSmall">{$control['userForm']['address_street']->control}</div>
 
                             </div>
-                            
+
                             <div class="aptZip">
                             	<div class="ltGreyBar"><p>Apartment #</p></div>
                                 <div class="addressTxt fieldSizeSmall">{$control['userForm']['address_apartment']->control}</div>
                             </div>
-                            
+
                             <div class="city">
                             	<div class="ltGreyBar"><p>City</p></div>
 
                                 <div class="addressTxt fieldSizeSmall">{$control['userForm']['address_city']->control}</div>
                             </div>
-                            
+
                             <div class="state">
                             	<div class="ltGreyBar"><p>State</p></div>
                                 <div class="addressTxt fieldSizeSmall">{$control['userForm']['address_state']->control}</div>
                             </div>
-                            
+
                             <div class="aptZip">
 
                             	<div class="ltGreyBar"><p>Zip Code</p></div>
                                 <div class="addressTxt fieldSizeSmall">{$control['userForm']['address_zip']->control}</div>
                             </div>
                         </div>
-                        
+
                          <div class="greySmallBox">
                         	<div class="darkGreyBar">
 
                             	<p>Gender</p>
                               <div class="clear"></div>
                             </div>
-                            
-                           <div class="plainBox"> 
-                            
+
+                           <div class="plainBox">
+
                              {$control['userForm']['gender']->control}
                           </div>
                         </div>
-                        
+
                         <div class="spacer19px"></div>
-                        
+
                        <div class="greySmallBox">
 
                         	<div class="darkGreyBar">
                             	<p>Date of Birth</p>
-                                
+
                                 <div class="clear"></div>
                             </div>
                             <div class="dobM fieldSizeMedium">{$control['userForm']['bdm']->control}</div>
 							<div class="dobD fieldSizeMedium">{$control['userForm']['bdd']->control}</div>
 							<div class="dobY fieldSizeMedium">{$control['userForm']['bdy']->control}</div>
                         </div>
-                       
+
                        <div class="greyBigBox">
                         	<div class="darkGreyBar">
                             	<p>Referred by</p>
                               <div class="clear"></div>
                             </div>
 
-                            
+
                           <div class="referred fieldSizeMedium">
                           {$control['userForm']['referral']->control}
                           </div>
                       </div>
-                       
-                       
+
+
                         <div class="saveBtnUser floatLeft"><a href="#" onclick="sms.form.user_form_submit('UserForm', '.form form'); return false;" title="Save Changes"></a></div>
                         <div class="cancelBtnUser floatLeft"><a href="{link Profile:search}"  onclick="return confirm('Do you really want to cancel changes?');" title="Cancel Changes"></a></div>
                 	</td>
-                    
+
                  <!-- START RIGHT COLUMN -->
                     <td class="userRightCol">
-                    
+
                     <div class="whiteSmallBox bottomMargin20px">
 
                         	<ul>
@@ -200,22 +201,22 @@ The user data has been saved.
                                 <li class="whiteBar">
                                 	{$control['userForm']['stylist_color']->control}
                                 </li
-                            </ul>	
+                            </ul>
                         </div>
-                    	                        
+
                         <div class="whiteSmallBox bottomMargin20px">
                         	<ul>
                             	<li class="purpleBar">
                                 	<div class="width230"><p>Recent Transactions</p></div>
                                     <div class="width73"><p>Spent</p></div>
                                 </li>
-                                {foreach $transactions as $trans} 
+                                {foreach $transactions as $trans}
                                 <li class="{if $trans->transaction_void}void {/if}{if $iterator->isOdd()}white{else}ltGrey{/if}BarLink"><a href="{link Checkout:order 'uid'=>null,'transaction_id'=>$trans->transaction_id}">
                                 	<div class="width230"><p>{$presenter->formatDate($trans->date, "F j, Y")}</p></div>
 
                                     <div class="width73"><p>${$presenter->formatPrice($trans->price)}</p></div></a>
                                 </li>
-                                {/foreach}                                
+                                {/foreach}
                                 <li class="ltYellowBar">
                                     	<table cellpadding="0" cellspacing="0" class="yellowBtnHolder alignCenter">
                                         	<tr>
@@ -228,9 +229,9 @@ The user data has been saved.
                                     </li>
                               </ul>
                             </div>
-                    	
-                       
-                    </td>    
+
+
+                    </td>
             	</tr>
 
             </table>
@@ -244,7 +245,7 @@ sms.form.field_defaults[{$field}] = {$default};
 {/foreach}
 
 $(document).ready(
-		function() { 
+		function() {
 			$('.form .phoneNum input').bind('change', sms.form.validation.fixPhoneNumber);
 			$('.form .notes textarea').bind('keyup', sms.form.validation.expandTextArea);
 		}

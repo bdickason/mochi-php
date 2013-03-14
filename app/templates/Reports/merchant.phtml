@@ -5,50 +5,51 @@
     	<div class="userResultWrapper qs-results" style="display:none;">
     	<div class="resultBoxUser">
             <div id="snippet--results" ></div>
-            
+
 		 </div>
 		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
-		 </div>	 
+		 </div>
     	<div class="searchBoxUser">
          {widget searchForm begin}
-		            	{$control['searchForm']['q']->control}            	
+		            	{$control['searchForm']['q']->control}
 		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
 		                <div class="clear"></div>
-		 {widget searchForm end} 
-		 </div>		 
-		 
+		 {widget searchForm end}
+		 </div>
+
    	  	 <div class="checkoutBtnUser floatRight"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
-         
-         <div class="clear"></div>	
-		 
+
+         <div class="clear"></div>
+
         </div>
-        
+
         <script type="text/javascript">
 
         $('.searchBoxUser input').attr({'autocomplete':'off'})
         	.focus()
-        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+        	.focusout(sms.quicksearch.hide)
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)
 			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
 
         sms.quicksearch.url = {link QuickSearch:quicksearchuser};
 
         </script>
     <!-- END TOP SEARCH AND CHECKOUT -->
-    
+
     <!-- START MERCHANT REPORT DETAILS -->
     	<div class="userWrapper">
 
         	<div class="popupBox">
-            	
+
             	{include 'navigation.phtml'}
-            	
-                <div class="popupHdrBar">                	
+
+                <div class="popupHdrBar">
                     <h4>Merchant report</h4>
                 </div>
-                                
-                <div class="transactionsBox">					                    
+
+                <div class="transactionsBox">
                     {widget retailFilterForm begin}
-                    
+
 <!--
 MERCHANT REPORT
 Date Range: Daily
@@ -71,34 +72,34 @@ Outputs:
                     	<th align="left">Date</th>
                     	<td id="datepicker" style="width:650px;">{$control['filterForm']['date']->control} use dd/mm/YYYY notation</td>
                     </tr>
-                    
+
                     <tr>
                     	<td colspan="2">
                     	<br/>
                     		{$control['filterForm']['show']->control}
                     	</td>
                     </tr>
-                    
+
                     </table>
-                    
-                    	
+
+
                     {widget retailFilterForm end}
-                    
+
                     {if $show_report}
-                    
+
                     <br/><br/>
-                    
+
                     <!-- TOTAL REVENUE -->
                     <table cellpadding="0" cellspacing="0" style="margin-bottom:20px; border-collapse:collapse; width:500px;">
-                    	
+
                     	<tr>
                     		<th>Total <strong>Merchant $$$</strong> for:  <strong>{$presenter->formatDate($start_date, 'n/j/Y')}</strong></th>
                     	</tr>
-                    	
+
                     	<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
-                    
+
                     <!-- REVENUE by Merchant-->
-                                        	
+
                     	<tr style="border-bottom:1px black solid;">
                     		<th>Merchant</th>
                     		<th>#</th>
@@ -135,28 +136,28 @@ Outputs:
 										<td>{$transaction['name']}</td>
 			                    		<td>{$presenter->formatDate($transaction['date'], 'H:i')}</td>
 			                    		<td align="right">${$presenter->formatPrice($transaction['sum'])}</td>
-			                    	</tr>	
+			                    	</tr>
 									{/foreach}
 
 									<tr style="border-top:1px black solid;">
 			                    		<th>{$entry['payment_type']} subtotal</th>
 			                    		<td>{$entry['count']}</td>
 			                    		<th align="right">${$presenter->formatPrice($entry['sum'])}</th>
-			                    	</tr>	
+			                    	</tr>
 								<tr><td>&nbsp;</td></tr>
 								<tr style="height:40px;"><td colspan="3">&nbsp;</td></tr>
 								{/foreach}
                     </table>
 					{/if}
        		  	</div>
-            </div>	
-            <div class="clear"></div>			
+            </div>
+            <div class="clear"></div>
 		</div>
 		<script type="text/javascript">
 		$(function() {
 			$("#datepicker input").datepicker();
 		});
-	
+
 		</script>
 <!-- END CLIENT AND SERVICE DETAILS -->
 

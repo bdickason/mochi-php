@@ -5,58 +5,59 @@
     	<div class="userResultWrapper qs-results" style="display:none;">
     	<div class="resultBoxUser">
             <div id="snippet--results" ></div>
-            
+
 		 </div>
 		 <div class="addClientBtnUser clear"><a href="{link Profile:adduser}" title="Add Client"></a></div>
-		 </div>	 
+		 </div>
     	<div class="searchBoxUser">
          {widget searchForm begin}
-		            	{$control['searchForm']['q']->control}            	
+		            	{$control['searchForm']['q']->control}
 		                <div class="searchBtnUser"><a href="#" onclick="$('form').submit();" title="Search"><div class="searchIconUser"><img src="{$basePath}/images/icon-search-med.png" width="40" height="42" alt="Search" /></div></a></div>
 		                <div class="clear"></div>
-		 {widget searchForm end} 
-		 </div>		 
-		 
+		 {widget searchForm end}
+		 </div>
+
    	  	 <div class="checkoutBtnUser floatRight"><a href="#" onclick="sms.checkout.show_checkout_step_1(); return false;" title="Checkout"></a></div>
-         
-         <div class="clear"></div>	
-		 
+
+         <div class="clear"></div>
+
         </div>
-        
+
         <script type="text/javascript">
 
         $('.searchBoxUser input').attr({'autocomplete':'off'})
         	.focus()
-        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)	
+        	.focusout(sms.quicksearch.hide)
+        	.bind('keydown', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keydown)
 			.bind('keyup', { url: {link QuickSearch:quicksearchuser}}, sms.quicksearch.keyup);
 
         sms.quicksearch.url = {link QuickSearch:quicksearchuser};
 
         </script>
     <!-- END TOP SEARCH AND CHECKOUT -->
-    
+
     <!-- START CLIENT AND SERVICE DETAILS -->
     	<div class="userWrapper">
 
         	<div class="popupBox">
-            	
+
             	{if empty($uid)}
-                <div class="popupHdrBar">                	
+                <div class="popupHdrBar">
                     <h4>Search Results: Transactions</h4>
                 </div>
-                
+
                 <div class="clientName">{if !empty($search)}#{$search}{/if}</div>
                 {/if}
                 {if !empty($uid)}
-                <div class="popupHdrBar">                	
+                <div class="popupHdrBar">
                     <h4>Transactions Of A Client</h4>
                 </div>
-                
+
                 <div class="clientName"><a href={link Profile:edit 'id'=>$uid}>{$client_name}</a></div>
                 {/if}
             	<div class="notes"><p>{$total_results} results</p></div>
 
-                
+
                 <div class="transactionsBox">
 						<ul class="purpleBar">
                         	<li>
@@ -90,7 +91,7 @@
                                             <td class="yellowBtnRight"></td>
                                         </tr>
                                      </table>
-                                    <div class="deleteBtn{if $t->transaction_void == 1}Void{/if} floatLeft"><a href="#" onclick="if (confirm('Do you really want to change this transaction?')) { sms.order.voidTrans({$t->transaction_id}); return false; }" title=" {if $t->transaction_void == 1}Unvoid{else}Void{/if}This"></a></div>	
+                                    <div class="deleteBtn{if $t->transaction_void == 1}Void{/if} floatLeft"><a href="#" onclick="if (confirm('Do you really want to change this transaction?')) { sms.order.voidTrans({$t->transaction_id}); return false; }" title=" {if $t->transaction_void == 1}Unvoid{else}Void{/if}This"></a></div>
                                 </div>
                              </li>
                 	    </ul>
@@ -109,10 +110,10 @@
                                     <td width="780"  class="pagination">
                                     {if $page == 0}1{else}<a href="{link Checkout:search 'search' => $search, 'order' => $order, 'page' => 0, 'uid' => $uid}">1</a>{/if}
                                     {if $page > 6}...{/if}
-                                    {for $i=($page - 6 < 0 ? 1 : $page - 6); $i < ($page + 6 > $max_page - 1 ? $max_page - 1 : $page + 6); $i++} 
+                                    {for $i=($page - 6 < 0 ? 1 : $page - 6); $i < ($page + 6 > $max_page - 1 ? $max_page - 1 : $page + 6); $i++}
                                     {if $i == $page}{$i + 1}{else}<a href="{link Checkout:search 'search' => $search, 'order' => $order, 'page' => $i, 'uid' => $uid}">{$i+1}</a>{/if}
-                                    {/for} 
-                                    {if $page < $max_page - 7}...{/if}                                  
+                                    {/for}
+                                    {if $page < $max_page - 7}...{/if}
                                     {if $page == $max_page - 1}{$max_page}{else}<a href="{link Checkout:search 'search' => $search, 'order' => $order, 'page' => $max_page - 1, 'uid' => $uid}">{$max_page}</a>{/if}
                                     </td>
                                     <td width="130"><div class="nextPage"><a href="{link Checkout:search 'search' => $search, 'order' => $order,'page' => $page_next, 'uid' => $uid}" title="Next Page">Next Page &nbsp;<img src="{$basePath}/images/right-white-arrow.png" alt="Next Page"></a></div></td>
@@ -122,7 +123,7 @@
 
                     	{/if}
        		  		</div>
-            	</div>	
+            	</div>
             <div class="clear"></div>
 			<script type="text/javascript">
 			sms.order.transURL = {link Checkout:void}

@@ -345,6 +345,14 @@ sms.quicksearch = {
 			}	
 			
 			sms.quicksearch.search(this.value);
+		},
+		hide: function(e)
+		{
+			// We are showing it, hide it
+			if($('.' + sms.quicksearch.target).is(":visible"))
+			{
+				$('.' + sms.quicksearch.target).hide();
+			}
 		}
 };
 

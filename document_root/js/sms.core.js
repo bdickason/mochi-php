@@ -472,7 +472,13 @@ sms.order = {
     		
     		var price = sms.order.getServicePrice(i1, i2);
     		
-    		$('#' + formPrefix + 'sprice' + id).val(sms.order.round(price));
+    		var sprice = $('#' + formPrefix + 'sprice' + id);
+    		
+    		// We only change this if the price is 0
+    		if(sprice.val() == 0)
+			{
+    			sprice.val(sms.order.round(price));
+			}
     		
     		// Set the item's taxable state
     		$('#' + formPrefix + 'staxable' + id).val(sms.order.getServiceIsTaxable(i1));

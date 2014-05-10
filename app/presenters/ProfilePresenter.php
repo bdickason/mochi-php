@@ -30,6 +30,7 @@ class ProfilePresenter extends ListingPresenter
 	function getProfileFields()
 	{
 		$stylists = Users::getList('uid,name', Users::TYPE_STYLIST)->orderBy('name ASC')->fetchPairs('uid', 'name');
+		$this->template->stylists = $stylists;
 		$stylists_cut = FormUtils::prependEmpty('Select cut stylist', $stylists);
 		$stylists_color = FormUtils::prependEmpty('Select color stylist', $stylists);
 

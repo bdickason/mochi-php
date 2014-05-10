@@ -204,31 +204,55 @@ The user data has been saved.
                             </ul>
                         </div>
 
+                  <!-- Upcoming Appointments -->
+                  <div class="whiteSmallBox bottomMargin20px">
+                    <ul>
+                        <li class="purpleBar">
+                            <div class="width230"><p>Upcoming Appointments</p></div>
+                              <div class="width73"><p>Date</p></div>
+                          </li>
+			{$currentTime}
+                        {foreach $appointments as $appointment}
+                        <li class="{if $iterator->isOdd()}white{else}ltGrey{/if}BarLink"><a href="#">
+                          <div class="width230"><p>{$presenter->formatDate($appointment->appointment_start_date, "F j, Y")}</p></div>
+
+                            <div class="width73"><p></p></div></a>
+                        </li>
+                        {/foreach}
+                      </ul>
+                  </div>
+                  <!-- /Upcoming Transactions -->
+
+                        <!-- Recent Transactions -->
                         <div class="whiteSmallBox bottomMargin20px">
                         	<ul>
                             	<li class="purpleBar">
                                 	<div class="width230"><p>Recent Transactions</p></div>
                                     <div class="width73"><p>Spent</p></div>
                                 </li>
-                                {foreach $transactions as $trans}
-                                <li class="{if $trans->transaction_void}void {/if}{if $iterator->isOdd()}white{else}ltGrey{/if}BarLink"><a href="{link Checkout:order 'uid'=>null,'transaction_id'=>$trans->transaction_id}">
-                                	<div class="width230"><p>{$presenter->formatDate($trans->date, "F j, Y")}</p></div>
 
-                                    <div class="width73"><p>${$presenter->formatPrice($trans->price)}</p></div></a>
-                                </li>
-                                {/foreach}
-                                <li class="ltYellowBar">
-                                    	<table cellpadding="0" cellspacing="0" class="yellowBtnHolder alignCenter">
-                                        	<tr>
-                                            	<td class="yellowBtnLeft"></td>
 
-                                                <td class="yellowBtnMid" onclick="location.href={link Checkout:search 'search'=>'','uid'=>$uid}"><p>View All Transactions</p></td>
-                                                <td class="yellowBtnRight"></td>
-                                            </tr>
-                                        </table>
-                                    </li>
-                              </ul>
-                            </div>
+                              {foreach $transactions as $trans}
+                              <li class="{if $trans->transaction_void}void {/if}{if $iterator->isOdd()}white{else}ltGrey{/if}BarLink"><a href="{link Checkout:order 'uid'=>null,'transaction_id'=>$trans->transaction_id}">
+                              	<div class="width230"><p>{$presenter->formatDate($trans->date, "F j, Y")}</p></div>
+
+                                  <div class="width73"><p>${$presenter->formatPrice($trans->price)}</p></div></a>
+                              </li>
+                              {/foreach}
+
+                              <li class="ltYellowBar">
+                                  	<table cellpadding="0" cellspacing="0" class="yellowBtnHolder alignCenter">
+                                      	<tr>
+                                          	<td class="yellowBtnLeft"></td>
+
+                                              <td class="yellowBtnMid" onclick="location.href={link Checkout:search 'search'=>'','uid'=>$uid}"><p>View All Transactions</p></td>
+                                              <td class="yellowBtnRight"></td>
+                                          </tr>
+                                      </table>
+                                  </li>
+                            </ul>
+                        </div>
+                        <!-- /Recent Transactions -->
 
 
                     </td>
@@ -254,3 +278,4 @@ $(document).ready(
 
 
 {/block}
+

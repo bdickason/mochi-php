@@ -90,6 +90,14 @@ class Appointments extends DataDomain
 						->where('appointment_start_date <= %s', $date . ' 23:59:59');
 		}
 
+		// Get all appointments after this date
+		if (isset($parameters['date_after']))
+		{
+			$date = date('Y-m-d', $parameters['date_after']);
+
+			$data = $data->where('appointment_start_date >= %s', $date . ' 00:00:00');
+		}
+
 		if (isset($parameters['active']))
 		{
 			$data = $data->where('appointment_active=1');
@@ -162,4 +170,22 @@ class Appointments extends DataDomain
 
 		return $appts;
 	}
+
+	public static function getListByUser($uid, $date)
+	{
+		$params = array();
+		$params['client'] = $uid;
+		$params['date_after'] = $date;
+		$a_data = self::find($params);
+
+		$appts = array();
+		foreach($a_data as $a_row)
+		{
+			$appt = Appointments::one($a_row['appointment_id']);
+			$appts[] = $appt->getDataObject();	// Only get one per day
+		}
+
+		return $appts;
+	}
 }
+

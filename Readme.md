@@ -49,6 +49,8 @@ Salon software without all the fluff
 7. Grant the user mochi privileges: `GRANT ALL PRIVILEGES ON *.* to mochi;`
 8. Import the snapshot for testing: `source snapshot.sql`
 
+
 ### Nette
 
 1. Make the `temp` directory writeable: `chmod 777 app/temp`
+2. Access the site!: http://localhost:80/

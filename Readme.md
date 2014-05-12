@@ -42,8 +42,12 @@ Salon software without all the fluff
 
 1. Download the OSX DMG: http://dev.mysql.com/downloads/mysql/
 2. Create a link to the mysql executable: `sudo ln -s /usr/local/mysql/bin/mysql /usr/sbin/mysql`
-3. Verify that it works: `mysql`
-
+3. Verify that it works: `sudo mysql`
+4. Add the user 'mochi': `CREATE USER 'mochi'@'localhost' IDENTIFIED BY '<PASSWORD>';`
+5. Create database 'mochi': `CREATE DATABASE mochi`
+6. Switch to database 'mochi': `use mochi`
+7. Grant the user mochi privileges: `GRANT ALL PRIVILEGES ON *.* to mochi;`
+8. Import the snapshot for testing: `source snapshot.sql`
 
 ### Nette
 

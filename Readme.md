@@ -19,10 +19,9 @@ Salon software without all the fluff
 ### Apache
 
 1. Enable Apache `sudo apachectl start`
-2. Grab the mochi repo
-3. Create a directory to represent your www: `mkdir ~/code/www`
+2. Grab the mochi repo (for example: /Users/dickason/code/mochi-php)
 4. Edit your config file: `sudo pico /etc/apache2/httpd.conf`
-* set `DocumentRoot` to `DocumentRoot "/Users/dickason/code/www"`
+* set `DocumentRoot` to `DocumentRoot "/Users/dickason/code/mochi-php/document_root"`
 * set `ServerName` to `ServerName localhost:80`
 5. Restart apache: `sudo apachectl restart`
 6. Visit http://localhost:80 to make sure it works.
@@ -46,4 +45,6 @@ Salon software without all the fluff
 3. Verify that it works: `mysql`
 
 
+### Nette
 
+1. Make the `temp` directory writeable: `chmod 777 app/temp`

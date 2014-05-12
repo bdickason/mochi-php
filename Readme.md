@@ -21,7 +21,7 @@ Salon software without all the fluff
 1. Enable Apache `sudo apachectl start`
 2. Grab the mochi repo
 3. Create a directory to represent your www: `mkdir ~/code/www`
-4. Edit your config file
+4. Edit your config file: `sudo pico /etc/apache2/httpd.conf`
 * set `DocumentRoot` to `DocumentRoot "/Users/dickason/code/www"`
 * set `ServerName` to `ServerName localhost:80`
 5. Restart apache: `sudo apachectl restart`
@@ -43,4 +43,7 @@ Salon software without all the fluff
 
 1. Download the OSX DMG: http://dev.mysql.com/downloads/mysql/
 2. Create a link to the mysql executable: `sudo ln -s /usr/local/mysql/bin/mysql /usr/sbin/mysql`
-3. Create a link to the mysql-admin executable: `sudo ln -s /usr/local/mysql/bin/mysql-admin /usr/sbin/mysql-admin`
+3. Verify that it works: `mysql`
+
+
+

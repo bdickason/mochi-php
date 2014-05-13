@@ -211,7 +211,6 @@ The user data has been saved.
                             <div class="width230"><p>Upcoming Appointments</p></div>
                              <div class="width73"><p>Stylist</p></div>
                           </li>
-			{$currentTime}
                         {foreach $appointments as $appointment}
                         <li class="{if $iterator->isOdd()}white{else}ltGrey{/if}BarLink"><a href="#">
                           <div class="width230"><p>{$presenter->formatDate($appointment->appointment_start_date, "F j, Y")}</p></div>
